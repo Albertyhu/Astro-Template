@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export async function getStaticPaths() {
+    var allPosts : Array<any> = []
+    try{
+        allPosts = await Astro.glob("../posts/*.md") ;
+    } catch (error){
+    console.log(error)
+    }
+    const allTags = (allPosts.map((post: any) => post.frontmatter.tags).flat()).map(item => item.tag)
+    const uniqueTags = [...new Set(allTags)]
+    return uniqueTags.map((tag: string)=> {
+        var filteredPosts = allPosts.filter((post : any) => post.frontmatter.tags?.some((item : {tag: string})=>item.tag === tag))
+        return{
+            params: {tag},
+            props: {posts: filteredPosts}
+        }
+    })
+}
+const { tag } = Astro.params; 
+const { posts } = Astro.props; 
+//console.log(posts)
+const filteredPost = posts.filter((val : any) => val.frontmatter.tags?.some((item :{tag: string}) => item.tag == tag))
+
+---
+<BaseLayout pageTitle={tag}>
+  <p>Posts tagged with {tag}</p>
+  <ul
+      class = "[&>li]:my-5"
+    >
+      {posts && posts.length > 0 && 
+          posts.map((item : any)=> <li class = "hover:font-bold hover:underline">
+                  <a href={item.url}>{item.frontmatter.title}</a>
+              </li>)
+      }
+  </ul>
+</BaseLayout>

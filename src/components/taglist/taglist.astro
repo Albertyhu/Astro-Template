@@ -1,0 +1,12 @@
+---
+import TagListItem from './tagListItem.astro'; 
+import type { TagListType, TagType} from '../../util/interface'; 
+const {tags} = Astro.props; 
+---
+<ul>
+    {
+    tags.map((item: {tag: string}) => <TagListItem url = {`../tags/${item.tag}`} tag ={item.tag} /> )
+    }
+</ul>
+
+

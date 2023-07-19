@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ListItem from "../components/blogListItem.astro";
+var allPosts : Array<any> = []; 
+try{
+  allPosts = await Astro.glob("../pages/posts/*.md") ;
+} catch (error){
+  console.log(error)
+}
+const pageTitle = "My Astro Learning Blog";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h1 
+    class = "font-bold text-2xl text-center"
+  >Blog posts</h1>
+  <ul class="[&>a>li]:my-1 list-inside">
+    {allPosts && allPosts.length > 0 && 
+      allPosts.map((post) => <ListItem post={post} />)
+    }
+  </ul>
+</BaseLayout>
