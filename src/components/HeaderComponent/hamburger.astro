@@ -1,7 +1,16 @@
 ---
+import { MobileMenuOpen } from "../../util/atomItems";
+import { useStore } from '@nanostores/preact';
+const MobileMenu = document?.getElementById("MobileMenu"); 
+const Dispatch = useStore(MobileMenuOpen)
+
 ---
 
-<div class="hamburger">
+<div
+    id = "MobileIcon"
+    class="hamburger"
+    onClick = {()=>MobileMenuOpen.set(!Dispath)} 
+>
     <span class="line mb-[10px]"></span>
     <span class="line mb-[10px]"></span>
     <span class="line"></span>
