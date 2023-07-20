@@ -1,15 +1,13 @@
 ---
-import PlaceHolder from '../assets/images/PlaceholderLogo.png';
-const {
-    image 
-} = Astro.props; 
+import Image from '../assets/images/PlaceholderLogo.png';
 ---
-
-<div
-    class = "object-fit ml-[1rem]"
->
-    <img 
-        src = {image}
-        class = "h-full w-auto"
-    />
-</div>
+<a href = "/">
+    <div
+        class = "object-fit ml-[1rem] w-fit h-fit"
+    >
+        <img 
+            src = {Image}
+            class = "h-full w-auto"
+        />
+    </div>
+</a>

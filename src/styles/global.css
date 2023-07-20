@@ -27,6 +27,10 @@
   .nav-links a{
     @apply block h-fit text-center px-0 no-underline text-[1.2rem] font-bold uppercase hover:bg-[#262626]; 
   }
+  .mobile-menu-links {
+    @apply hover:bg-white w-full rounded-lg px-1 cursor-pointer;
+
+  }
 }
 
 body {
