@@ -1,0 +1,58 @@
+---
+import EmailIcon from "../iconComponents/email.astro";
+const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`; 
+---
+<form 
+    action="" 
+    method="POST"
+    class="formBackground w-11/12 md:w-9/12 mx-auto lg:w-6/12 rounded-lg mt-[20px] py-10 box_shadow mb-[120px] sm:mb-[110px]"
+>
+    <div
+        id="Shell"
+        class={`w-11/12 mx-auto ${FormStyle}`}
+        >
+            <div class = "grid sm:flex">
+                <EmailIcon customStyle = "mx-auto mb-5" />
+                <section 
+                    class = "mx-auto sm:ml-[5px]"
+                >
+                    <h2 class ="text-base sm:text-2xl text-center sm:text-left font-bold my-1">Have something to say?</h2>
+                    <h2 class ="text-base sm:text-2xl text-center sm:text-left my-1">Share your thoughts.</h2>
+                </section>
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Email</label>
+                <input 
+                    name="email"
+                    id="emailInput"
+                    type="text"
+                    class = "formInput"
+                    placeholder="Type your email here"
+                    required
+                />
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Subject Line</label>
+                <input 
+                    name="subject"
+                    id="subjectInput"
+                    type="text"
+                    class = "formInput"
+                    placeholder="Type your subject line here"
+                />
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Message</label>
+                <textarea
+                    name="message"
+                    id="messageInput"
+                    rows={5}
+                    class ="outline-1 border-2 resize-none p-1 rounded-lg bg-transparent" 
+                >
+                </textarea>
+            </div>
+            <button
+                class = "fancyButton !ml-auto !mr-0"
+            >Send</button>
+    </div>
+</form>

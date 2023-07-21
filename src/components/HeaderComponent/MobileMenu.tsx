@@ -48,7 +48,7 @@ const MobileMenuComponent = () =>{
     return (
         <div
             id="Mobile_Menu"
-            class = {`grid md:hidden h-full fixed left-auto right-0 top-0 overflow-y-auto overflow-x-hidden transition-all mobile-menu ${MENU_WIDTH} ${TRANSLATE}`}
+            class = {`grid md:hidden h-full fixed left-auto right-0 top-0 overflow-y-auto overflow-x-hidden transition-all mobile-menu w-[250px] translate-x-[250px]`}
             ref = {MobileMenuRef}
         >
             <div
@@ -64,14 +64,16 @@ const MobileMenuComponent = () =>{
                         class = "mb-5"
                     />
                  </a>
-                <MenuLinks />
+                <div class = "grid mobile-menu-links">
+                    <MenuLinks />
+                </div>
                 <hr class="border-[1px] w-11/12 mx-auto bg-slate-300 mb-5" />
                 <div class ="flex flex-row justify-between">
                     <span>Dark Mode</span><SwitchComponent />
                 </div>
                 <hr class="border-[1px] w-11/12 mx-auto bg-slate-300 my-5" />
                 <p 
-                class = "mobile-menu-links"
+                class = "hover:bg-white w-full rounded-lg px-1 cursor-pointer mb-10"
                 onClick = {CloseMobileMenu} 
                 >Close</p>
             </div>

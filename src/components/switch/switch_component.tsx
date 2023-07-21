@@ -38,7 +38,7 @@ const SwitchComponent = () => {
         window.localStorage.setItem("theme", render)
     } 
     return(
-        <label class="switch">
+        <label class="switch cursor-pointer">
             <input 
             type="checkbox" 
             checked = {checked}

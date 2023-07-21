@@ -1,8 +1,9 @@
 ---
 import Header from "../components/HeaderComponent/header.astro";
-import Footer from "../components/footer.astro";
+import Footer from "../components/footer/index.astro";
 import "../styles/global.css";
 const { pageTitle } = Astro.props;
+import ScrollTopButton from "../components/scrollTopButton.astro";
 
 ---
 
@@ -16,9 +17,10 @@ const { pageTitle } = Astro.props;
     </head>
     <body>
         <Header />
-        <div class="w-11/12 mx-auto h-[100vh]">
+        <div class="w-11/12 mx-auto mt-[60px] min-h-[100vh] sm:min-h-[95vh] mb-[250px] sm:mb-[120px]">
             <slot />
         </div>
         <Footer />
+        <ScrollTopButton />
     </body>
 </html>

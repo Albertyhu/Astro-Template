@@ -1,9 +1,10 @@
 ---
 import Image from '../assets/images/PlaceholderLogo.png';
+const {customStyle} = Astro.props; 
 ---
 <a href = "/">
     <div
-        class = "object-fit ml-[1rem] w-fit h-fit"
+        class = {`object-fit ml-[1rem] w-fit h-fit ${customStyle}`}
     >
         <img 
             src = {Image}

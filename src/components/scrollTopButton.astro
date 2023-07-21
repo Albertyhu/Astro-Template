@@ -1,0 +1,18 @@
+---
+import { Icon } from 'astro-icon'
+---
+<div
+    class ="ScrollTopButton block w-fit userselect-none" 
+>
+<Icon 
+    id="ScrollTopButton"
+    class = "mx-auto w-[3rem] h-[3rem] userselect-none"
+    name="ic:sharp-arrow-circle-up" />
+<p
+    class = "whitespace-nowrap mx-auto text-center"
+>Scroll to top</p>
+</div>
+<script>
+    const button = document.getElementById("ScrollTopButton")
+    button?.addEventListener("mousedown", ()=>window.scrollTo({top: 0,left: 0,behavior: "smooth",}))
+</script>

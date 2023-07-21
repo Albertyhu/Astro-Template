@@ -1,25 +1,24 @@
 ---
-//import MenuIcon from "./hamburger.astro";
 import MenuIcon from "./hamburger.tsx";
 import ThemeIcon from "../ThemeIcon.astro";
 import Navigation from '../navigation.astro'; 
-import PlaceHolder from '../../assets/images/PlaceholderLogo.png'; 
 import MobileMenu from './MobileMenu.tsx'; 
 import { Logo } from '../../customization/logo.js'; 
-const {} = Astro.props; 
 ---
 
 <header 
     id ="header-component"
-    class="w-full flex bg-black text-white min-h-[50px] sm:min-h-[50px] relative z-[100] fixed justify-between">
-    <div
-        class = "object-fit ml-[1rem]"
-    >
-        <img 
-            src = {Logo()}
-            class = "h-full w-auto"
-        />
-    </div>
+    class="w-full flex bg-black text-white min-h-[50px] z-[100] fixed justify-between">
+    <a href="/">
+        <div
+            class = "object-fit ml-[1rem] cursor-pointer"
+        >
+            <img 
+                src = {Logo()}
+                class = "h-full w-auto"
+            />
+        </div>
+    </a>
     <MenuIcon client:load />
     <nav id="header-wrapper" class="nav-links">
         <Navigation />
