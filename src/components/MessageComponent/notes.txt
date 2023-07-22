@@ -1,0 +1,2 @@
+Built with React. 
+It takes an array of messages and displays it to the screen for a short time.

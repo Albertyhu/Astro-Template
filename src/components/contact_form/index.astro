@@ -1,11 +1,42 @@
 ---
 import EmailIcon from "../iconComponents/email.astro";
 const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`; 
+import { OwnerName, WebsiteName, OwnerEmail} from '../../customization/identity.tsx';
+import { ConstructionIcon } from "lucide-react";
+if(Astro.request.method === "POST"){
+    const data = await Astro.request.formData();  
+    const email = data.get("email");
+    const subject = data.get("subject");
+    const message = data.get("message");
+    const FetchURL = `${import.meta.env.EMAIL_API_URL}/contact_form/${OwnerName}`; 
+    const response = await fetch(FetchURL, {
+        method: "POST",
+        body: {
+            email: JSON.stringify(email),
+            subject: JSON.stringify(subject), 
+            message: JSON.stringify(message),
+            site: JSON.stringify(WebsiteName), 
+            recipient_email: JSON.stringify(OwnerEmail), 
+        }, 
+        header: {
+            "Content-Type" : "application/json", 
+        }
+
+    })
+    const result = await response.json()
+    if(response.ok){
+        console.log("Message was emailed successfully.")
+    }
+    else{
+        console.log("Error: ", result.error)
+    }
+}
 ---
 <form 
     action="" 
     method="POST"
     class="formBackground w-11/12 md:w-9/12 mx-auto lg:w-6/12 rounded-lg mt-[20px] py-10 box_shadow mb-[120px] sm:mb-[110px]"
+    id = "contactForm"
 >
     <div
         id="Shell"
@@ -25,7 +56,7 @@ const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
                 <input 
                     name="email"
                     id="emailInput"
-                    type="text"
+                    type="email"
                     class = "formInput"
                     placeholder="Type your email here"
                     required
@@ -39,6 +70,7 @@ const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
                     type="text"
                     class = "formInput"
                     placeholder="Type your subject line here"
+                    required
                 />
             </div>
             <div class = "grid w-full my-[10px]">
@@ -56,3 +88,6 @@ const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
             >Send</button>
     </div>
 </form>
+<script>
+
+</script>
