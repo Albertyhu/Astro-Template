@@ -2,38 +2,47 @@
 import EmailIcon from "../iconComponents/email.astro";
 const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`; 
 import { OwnerName, WebsiteName, OwnerEmail} from '../../customization/identity.tsx';
-import { ConstructionIcon } from "lucide-react";
+import nodemailer from 'nodemailer'; 
+
 if(Astro.request.method === "POST"){
     const data = await Astro.request.formData();  
     const email = data.get("email");
     const subject = data.get("subject");
     const message = data.get("message");
-    const FetchURL = `${import.meta.env.EMAIL_API_URL}/contact_form/${OwnerName}`; 
-    const response = await fetch(FetchURL, {
-        method: "POST",
-        body: {
-            email: JSON.stringify(email),
-            subject: JSON.stringify(subject), 
-            message: JSON.stringify(message),
-            site: JSON.stringify(WebsiteName), 
-            recipient_email: JSON.stringify(OwnerEmail), 
-        }, 
-        header: {
-            "Content-Type" : "application/json", 
+    const transporter = nodemailer.createTransport({
+        host: import.meta.env.SMTP_HOST,
+        port: import.meta.env.SMTP_PORT * 1,
+        secure: true,
+        auth: {
+            user: import.meta.env.SMTP_USERNAME,
+            pass: import.meta.env.SMTP_PASSWORD,
+        },
+        tls: {
+            rejectUnauthorized: false,
+            ciphers: 'SSLv3'
         }
-
-    })
-    const result = await response.json()
-    if(response.ok){
-        console.log("Message was emailed successfully.")
-    }
-    else{
-        console.log("Error: ", result.error)
+    });
+    const mailOptions = {
+        from: email,
+        to: 'hualbert.y@gmail.com',
+        subject: `${subject}`,
+        text: `Hello, you have received a new message from the contact form on your website: \n\n email: ${email} \n\n ${message}`
+    };
+    try{
+    transporter.sendMail(mailOptions, function (error: any, info: any) {
+        if (error) {
+            console.log("error: ", error)
+        } else {
+            console.log("success")
+        }
+    });
+    } catch(error){
+        console.log("error: ", error)
     }
 }
+
 ---
 <form 
-    action="" 
     method="POST"
     class="formBackground w-11/12 md:w-9/12 mx-auto lg:w-6/12 rounded-lg mt-[20px] py-10 box_shadow mb-[120px] sm:mb-[110px]"
     id = "contactForm"
@@ -78,16 +87,14 @@ if(Astro.request.method === "POST"){
                 <textarea
                     name="message"
                     id="messageInput"
-                    rows={5}
+                    rows="5"
                     class ="outline-1 border-2 resize-none p-1 rounded-lg bg-transparent" 
-                >
-                </textarea>
+                    placeholder="Type your message here."
+                ></textarea>
             </div>
             <button
-                class = "fancyButton !ml-auto !mr-0"
+                class = "fancyButton !ml-auto !mr-0 bg-slate-300"
+                type="submit"
             >Send</button>
     </div>
 </form>
-<script>
-
-</script>

@@ -24,6 +24,7 @@
     "lucide-react": "^0.262.0",
     "nanostores": "^0.9.3",
     "netlify-cms": "^2.10.192",
+    "nodemailer": "^6.9.4",
     "preact": "^10.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
