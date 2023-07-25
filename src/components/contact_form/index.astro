@@ -34,9 +34,9 @@ if(Astro.request.method === "POST"){
                 console.log("error: ", error)
             } else {
                 console.log("success")
-                Astro.redirect("/index")
             }
         });
+        return Astro.redirect("/message_sent")
     })
 
     } catch(error){
