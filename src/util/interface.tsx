@@ -21,3 +21,9 @@ export type TagObject = {
 export type TagListType = {
     tags: Array<TagType>, 
 }
+
+export type ContactSubmission = {
+    email: string, 
+    subject: string, 
+    message: string, 
+}
