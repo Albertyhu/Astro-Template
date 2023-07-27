@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; 
+const allPosts = await Astro.glob("../posts/*.md"); 
+const allAuthors= [...new Set(allPosts.map((post: any) =>post.frontmatter.author))]
+---
+<BaseLayout
+    pageTitle="Authors"
+>
+<h1>Authors</h1>
+{allAuthors ?
+    <ul>
+        {allAuthors.map((author:string) =><a href = {`/authors/${author}`}><li>{author}</li></a>)}
+    </ul>
+    :
+    <p>There are currently no authors on the site yet.</p>
+}
+</BaseLayout>

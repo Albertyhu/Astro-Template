@@ -27,3 +27,10 @@ export type ContactSubmission = {
     subject: string, 
     message: string, 
 }
+
+export interface ImageMetadata {
+  src: string;
+  width: number;
+  height: number;
+  format: string;
+}

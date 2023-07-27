@@ -1,0 +1,15 @@
+---
+import TagListItem from './tagListItem.astro'; 
+const {tags} = Astro.props; 
+---
+
+<div class = "flex flex-wrap ">
+    <p
+     class = "font-bold"
+    >Tags:</p>
+    {
+    tags.map((item: {tag: string}) => <TagListItem url = {`../tags/${item.tag}`} tag ={item.tag} /> )
+    }
+</div>
+
+

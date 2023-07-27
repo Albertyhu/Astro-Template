@@ -60,8 +60,9 @@ const MobileMenuComponent = () =>{
                     class ="mx-auto userselect-none"
                 >
                     <img
-                        src = {Logo()}
+                        src = {Logo().src}
                         class = "mb-5"
+                        alt="logo"
                     />
                  </a>
                 <div class = "grid mobile-menu-links">

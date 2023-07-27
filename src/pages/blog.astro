@@ -2,6 +2,7 @@
 export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ListItem from "../components/blogListItem.astro";
+import BlogPreview from '../components/blogComponents/previewLink.astro'
 var allPosts : Array<any> = []; 
 try{
   allPosts = await Astro.glob("../pages/posts/*.md") ;
@@ -12,12 +13,19 @@ const pageTitle = "My Astro Learning Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1 
-    class = "font-bold text-2xl text-center"
-  >Blog posts</h1>
-  <ul class="[&>a>li]:my-1 list-inside">
-    {allPosts && allPosts.length > 0 && 
-      allPosts.map((post) => <ListItem post={post} />)
-    }
-  </ul>
+  <div
+    class = "mb-[100px]"
+    id="content-wrapper"
+  >
+    <h1 
+      class = "font-bold text-2xl text-center"
+    >Blog posts</h1>
+    <ul class="[&>a>li]:my-1 list-inside">
+      {allPosts && allPosts.length > 0 && 
+        <div class = "grid sm:grid-cols-2 md:grid-cols-3 sm:gap-5">
+            {allPosts.map(post =><BlogPreview {...post.frontmatter} url = {post.url}/>)}
+        </div>
+      }
+    </ul>
+  </div>
 </BaseLayout>

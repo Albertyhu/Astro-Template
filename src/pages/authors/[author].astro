@@ -1,0 +1,41 @@
+---
+export const prerender = true; 
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPreview from '../../components/blogComponents/previewLink.astro'; 
+export async function getStaticPaths() {
+    const allPosts = await Astro.glob("../posts/*.md"); 
+    const uniqueAuthors = [...new Set(allPosts.map(post => post.frontmatter.author))]
+    return uniqueAuthors.map(author => {
+        const filteredPosts = allPosts.filter(post => post.frontmatter.author === author)
+        return {
+            params: {author}, 
+            props: {
+                posts: filteredPosts,
+            }
+        }
+    })
+}
+const {author} = Astro.params; 
+const {posts} = Astro.props; 
+const pageTitle = `Blog posts by ${author}`
+---
+<BaseLayout
+    pageTitle = {pageTitle}
+>
+<div
+    id="wrapper"
+    class="mb-[150px]"
+>
+    <h1
+        class = "text-3xl font-bold text-center mt-10"
+    >{pageTitle}</h1>
+    {
+        posts ? 
+        <div class = "grid sm:grid-cols-2 md:grid-cols-3 sm:gap-5">
+            {posts.map(post =><BlogPreview {...post.frontmatter} url = {post.url} />)}
+        </div>
+        : 
+        <p>This author hasn't published any posts yet.</p>
+    }
+</div>
+</BaseLayout>

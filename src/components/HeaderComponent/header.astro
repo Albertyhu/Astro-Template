@@ -5,21 +5,13 @@ import ThemeIcon from "../ThemeIcon.astro";
 import Navigation from '../navigation.astro'; 
 import MobileMenu from './MobileMenu.tsx'; 
 import { Logo } from '../../customization/logo.js'; 
+import LogoComponent from "../logoComponent.astro";
 ---
 
 <header 
     id ="header-component"
     class="w-full flex bg-black text-white min-h-[50px] z-[100] fixed justify-between">
-    <a href="/">
-        <div
-            class = "object-fit ml-[1rem] cursor-pointer"
-        >
-            <img 
-                src = {Logo()}
-                class = "h-full w-auto"
-            />
-        </div>
-    </a>
+    <LogoComponent customStyle = "ml-[1rem] mr-auto" />
     <MenuIcon client:load />
     <nav id="header-wrapper" class="nav-links">
         <Navigation />

@@ -1,14 +1,18 @@
 ---
-import Image from '../assets/images/PlaceholderLogo.png';
 const {customStyle} = Astro.props; 
+import { Logo } from '../customization/logo.js'; 
 ---
-<a href = "/">
-    <div
-        class = {`object-fit ml-[1rem] w-fit h-fit ${customStyle}`}
+<div
+    class = {`cursor-pointer object-fit block w-fit ${customStyle ? customStyle : "h-full w-auto cursor-pointer object-fit"}`}
+    id="LogoWrapper"
+>
+    <a
+        href = "/"
     >
         <img 
-            src = {Image}
+            src = {Logo().src}
             class = "h-full w-auto"
+            alt="Logo"
         />
-    </div>
-</a>
+    </a>
+</div>
