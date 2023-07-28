@@ -28,7 +28,7 @@ export default function jsonLDGenerator({ type, post, url }) {
       "@context": "https://schema.org/",
       "@type": "WebSite",
       "name": "${siteData.title}",
-      "url": "${Astro.url}"
+      "url": "${import.meta.env.SITE_URL}"
       }
     </script>`;
 }

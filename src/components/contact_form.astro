@@ -1,7 +1,10 @@
 ---
 export const prerender = false; 
 import EmailIcon from "./iconComponents/email.astro";
-const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`; 
+const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
+import { MessageArray } from "@/util/atomItems";
+import { useStore } from '@nanostores/preact'; 
+
 ---
 <form 
     method="POST"
@@ -59,19 +62,18 @@ const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
             >Send</button>
     </div>
 </form>
-<script>
+<script>import { MessageArray } from "@/util/atomItems";
+
     const HandleSubmit = async (data : any)  =>{
         const formData = new FormData(data); 
         const fetchURL  =`/api/contact_form`; 
-        console.log(fetchURL)
         const res = await fetch(fetchURL, {
             method: "POST",
             body: formData, 
         })
         const result = await res.json(); 
         if(res.ok){
-            console.log("Your message has been sent.")
-            window.location.href = "/message_sent"
+             window.location.href = "/message_sent"
         }
         if(result.error){
             console.log(result.error); 

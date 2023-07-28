@@ -3,8 +3,6 @@ import {
     MobileMenuOpen,
  } from "../../util/atomItems";
 import { useStore } from '@nanostores/preact';
-import type { Store } from 'nanostores';
-
 
 const MobileMenu = () =>{
 const $MobileMenuOpen = useStore(MobileMenuOpen)

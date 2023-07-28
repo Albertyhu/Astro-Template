@@ -4,7 +4,7 @@ import jsonLDGenerator from "../util/jsonLD";
 const {
   title,
   description,
- // url = import.meta.env.API_URL,
+ // url = import.meta.env.SITE_URL,
   url = Astro.url,
   image,
   frontmatter,
@@ -43,7 +43,7 @@ const jsonLD = jsonLDGenerator({
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content={image?.src || siteData.image.src} />
 <meta name="twitter:image:alt" content={title} />
-<meta name="twitter:domain" content={import.meta.env.API_URL} />
+<meta name="twitter:domain" content={import.meta.env.SITE_URL} />
 
 {robots && <meta name="robots" content="noindex, nofollow" />}
 
