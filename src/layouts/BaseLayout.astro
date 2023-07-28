@@ -2,9 +2,13 @@
 import Header from "../components/HeaderComponent/header.astro";
 import Footer from "../components/footer/index.astro";
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
+const { 
+    pageTitle, 
+    customDescription, 
+    frontmatter, 
+ } = Astro.props;
 import ScrollTopButton from "../components/scrollTopButton.astro";
-
+import SEO from "@/components/SEO.astro";
 ---
 
 <html lang="en">
@@ -13,7 +17,13 @@ import ScrollTopButton from "../components/scrollTopButton.astro";
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <SEO 
+            title = {pageTitle}
+            {frontmatter}
+            description ={customDescription ? customDescription : "This is a blogging site."}
+        />
         <title>{pageTitle}</title>
+
     </head>
     <body>
         <Header />

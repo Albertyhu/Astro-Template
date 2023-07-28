@@ -32,7 +32,7 @@ const pageTitle = `Blog posts by ${author}`
     {
         posts ? 
         <div class = "grid sm:grid-cols-2 md:grid-cols-3 sm:gap-5">
-            {posts.map(post =><BlogPreview {...post.frontmatter} url = {post.url} />)}
+            {posts.map((post: any) =><BlogPreview {...post.frontmatter} url = {post.url} />)}
         </div>
         : 
         <p>This author hasn't published any posts yet.</p>

@@ -1,0 +1,11 @@
+{
+  "title": "template site",
+  "business_name": "Business Name",
+  "description": "My musings about the Astro framework", 
+  "owner_name": "TheLastSliceOfPizza",
+  "owner_email": "hualbert@rocketmail.com", 
+  "image": {
+    "src":"", 
+    "alt": ""
+  }
+}

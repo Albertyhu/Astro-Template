@@ -2,7 +2,9 @@
 import CreatorComponent from '../creatorComponent.astro';
 import LogoComponent from '../logoComponent.astro';
 import Navigation from '../navigation.astro'; 
-import {WebsiteName, YEAR}  from '../../customization/identity.tsx'; 
+import siteData from '../../customization/siteData.json'; 
+
+var YEAR = new Date().getFullYear(); 
 ---
 
 <footer
@@ -33,7 +35,7 @@ import {WebsiteName, YEAR}  from '../../customization/identity.tsx';
     <div
         class ="w-full min-h-[20px] bg-black text-slate-300 text-center relative"
     >
-        <span id = "WebsiteName">{WebsiteName}</span> &copy;
+        <span id = "WebsiteName">{siteData.business_name}</span> &copy;
         <span id = "CopyRight">{YEAR}</span>
         <CreatorComponent customStyle = "sm:absolute sm:right-[10px] sm:top-0" />
     </div>

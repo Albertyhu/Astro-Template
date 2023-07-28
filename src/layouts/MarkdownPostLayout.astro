@@ -5,7 +5,7 @@ const { frontmatter } = Astro.props;
 const tags = frontmatter.tags; 
 ---
 
-<BaseLayout pateTitle={frontmatter.title}>
+<BaseLayout pateTitle={frontmatter.title} {frontmatter}>
     <div 
         class = "flex flex-col sm:flex-row sm:gap-[5em] mt-5"
     >
