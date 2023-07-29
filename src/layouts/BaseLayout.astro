@@ -24,7 +24,7 @@ import MessageComponent from "@/components/MessageComponent/messageComponent";
             description ={customDescription ? customDescription : "This is a blogging site."}
         />
         <title>{pageTitle}</title>
-
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     </head>
     <body>
         <Header />
@@ -34,5 +34,16 @@ import MessageComponent from "@/components/MessageComponent/messageComponent";
         </div>
         <Footer />
         <ScrollTopButton />
+        <script>
+            if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", user => {
+                    if (!user) {
+                        window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
