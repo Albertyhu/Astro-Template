@@ -19,7 +19,7 @@ collections:
         label: "Layout"
         default: "../../layouts/MarkdownPostLayout.astro"
       - name: "title"
-        widget: "String"
+        widget: "string"
         label: "Title"
       - name: "pubDate"
         widget: "datetime"
