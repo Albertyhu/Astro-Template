@@ -14,7 +14,7 @@ export default defineConfig({
   },
   output: 'server',
   integrations: [preact(), react(), tailwind(), sitemap()],
-  //adapter: netlify(), 
+  adapter: netlify(), 
   adapter: node({
     mode: "standalone"
   })
