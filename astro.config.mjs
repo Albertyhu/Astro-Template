@@ -85,7 +85,7 @@ export default defineConfig({
   }), 
   ],
   adapter: netlify(), 
-  adapter: node({
-    mode: "standalone"
-  })
+  // adapter: node({
+  //   mode: "standalone"
+  // })
 });
