@@ -31,11 +31,11 @@ collections:
       - name: "images"
         widget: "list"
         label: "Images"
-        field: {name: "image", widget: "image", label: "Image"}
+        field: [{name: "image", widget: "image", label: "Image"}]
       - name: "tags"
         widget: "list"
         label: "Tags"
-        field: {name: "tag", widget: "string", label: "Tag"}
+        field: [{name: "tag", widget: "string", label: "Tag"}]
       - name: "body"
         widget: "markdown"
         label: "Body"
