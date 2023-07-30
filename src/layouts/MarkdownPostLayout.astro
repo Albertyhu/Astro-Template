@@ -18,10 +18,10 @@ const tags = frontmatter.tags;
             <hr class="border-2 bg-black w-full mb-5" />
             <slot />
         </div>
+        <div>
             {tags && tags.length > 0 &&
                 <TagList tags = {tags} />
             }
-        <div>
         </div>
     </div>  
 </BaseLayout>
