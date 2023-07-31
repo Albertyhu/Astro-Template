@@ -3,7 +3,7 @@ import preact from "@astrojs/preact";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify/functions";
-import node from "@astrojs/node";
+
 //https://astro.build/config
 import sitemap from "@astrojs/sitemap";
 
@@ -20,7 +20,4 @@ export default defineConfig({
     sitemap(),
   ],
   adapter: netlify(), 
-  // adapter: node({
-  //   mode: "standalone"
-  // })
 });
