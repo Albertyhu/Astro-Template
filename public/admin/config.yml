@@ -24,16 +24,19 @@ collections:
       - name: "description"
         widget: "string"
         label: "Description"
+        required: false
       - name: "author"
         widget: "string"
         label: "Author"
       - name: "images"
         widget: "list"
         label: "Images"
+        required: false
         field: {label: "Image", name: "image", widget: "image"}
       - name: "tags"
         widget: "list"
         label: "Tags"
+        required: false
         field: {label: "Tag", name: "tag", widget: "string"}
       - name: "body"
         widget: "markdown"
