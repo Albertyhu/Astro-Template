@@ -24,7 +24,7 @@ import MessageComponent from "@/components/MessageComponent/messageComponent";
             description ={customDescription ? customDescription : "This is a blogging site."}
         />
         <title>{pageTitle}</title>
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     </head>
     <body>
         <Header />
