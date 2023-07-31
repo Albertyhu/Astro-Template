@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer"; 
 import type { APIRoute } from 'astro';
+import siteData from '@/customization/siteData.json';
 
 export async function post<APIRoute>({params, request} : {params: any, request : Request})  {
     try{
@@ -23,7 +24,7 @@ export async function post<APIRoute>({params, request} : {params: any, request :
 
         const mailOptions = {
             from: email,
-            to: 'hualbert.y@gmail.com',
+            to: siteData.owner_email,
             subject: `${subject}`,
             text: `Hello, someone has sent you a new message through your website: \n\n email: ${email} \n\n ${message}`
         };
