@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer"; 
 import type { APIRoute } from 'astro';
 import siteData from '@/customization/siteData.json';
+import { Smartphone } from "lucide-react";
 
 export async function post<APIRoute>({params, request} : {params: any, request : Request})  {
     try{
@@ -9,8 +10,10 @@ export async function post<APIRoute>({params, request} : {params: any, request :
         const subject = data.get("subject"); 
         const message = data.get("message");
         const transporter = nodemailer.createTransport({
-            host: import.meta.env.SMTP_HOST,
-            port: import.meta.env.SMTP_PORT * 1,
+            // host: import.meta.env.SMTP_HOST,
+            // port: import.meta.env.SMTP_PORT * 1,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: import.meta.env.SMTP_USERNAME,
