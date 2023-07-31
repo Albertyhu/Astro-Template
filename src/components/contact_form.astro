@@ -78,15 +78,22 @@ const templateId = import.meta.env.EMAILJS_TEMPLATE_ID;
     </div>
 </form>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type = "text/javascript" src = "../../src/script/emailjs.js"></script>
+
 <script
     type='module'
     define:vars={{publicKey, serviceId, templateId, siteData}}
     is:inline
     >
-   // import emailjs from "@emailjs/browser";
+    (function(){
+        try{
+            emailjs.init(publicKey);
+        } catch(error){
+            console.log("error: ", error)
+        }
+    })();
+
     const HandleSubmit = () =>{   
-        console.log("key: ", publicKey)
+
         const nameInput = document.getElementById("nameInput"); 
         const emailInput = document.getElementById("emailInput");
         const subjectInput = document.getElementById("subjectInput");
