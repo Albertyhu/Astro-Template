@@ -4,6 +4,10 @@ import EmailIcon from "./iconComponents/email.astro";
 const FormStyle = `[&>div>label]:text-black rounded-md text-2xl`;
 import { MessageArray } from "@/util/atomItems";
 import { useStore } from '@nanostores/preact'; 
+import siteData from "@/customization/siteData.json"; 
+const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY; 
+const serviceId = import.meta.env.EMAILJS_SERVICE_ID; 
+const templateId = import.meta.env.EMAILJS_TEMPLATE_ID; 
 
 ---
 <form 
@@ -23,6 +27,17 @@ import { useStore } from '@nanostores/preact';
                     <h2 class ="text-base sm:text-2xl text-center sm:text-left font-bold my-1">Have something to say?</h2>
                     <h2 class ="text-base sm:text-2xl text-center sm:text-left my-1">Share your thoughts.</h2>
                 </section>
+            </div>
+            <div class = "grid w-full my-[10px]">
+                <label class ="formLabel">Your full name</label>
+                <input 
+                    name="name"
+                    id="nameInput"
+                    type="text"
+                    class = "formInput"
+                    placeholder="Type your full name here"
+                    required
+                />
             </div>
             <div class = "grid w-full my-[10px]">
                 <label class ="formLabel">Email</label>
@@ -62,27 +77,50 @@ import { useStore } from '@nanostores/preact';
             >Send</button>
     </div>
 </form>
-<script>import { MessageArray } from "@/util/atomItems";
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type = "text/javascript" src = "../../src/script/emailjs.js"></script>
+<script
+    type='module'
+    define:vars={{publicKey, serviceId, templateId, siteData}}
+    is:inline
+    >
+   // import emailjs from "@emailjs/browser";
+    const HandleSubmit = () =>{   
+        console.log("key: ", publicKey)
+        const nameInput = document.getElementById("nameInput"); 
+        const emailInput = document.getElementById("emailInput");
+        const subjectInput = document.getElementById("subjectInput");
+        const messageInput = document.getElementById("messageInput");
 
-    const HandleSubmit = async (data : any)  =>{
-        const formData = new FormData(data); 
-        const fetchURL  =`/api/contact_form`; 
-        const res = await fetch(fetchURL, {
-            method: "POST",
-            body: formData, 
-        })
-        const result = await res.json(); 
-        if(res.ok){
-             window.location.href = "/message_sent"
-        }
-        if(result.error){
-            console.log(result.error); 
+        const name = nameInput.value; 
+        const email = emailInput.value;
+        const subject = subjectInput.value;
+        const message = messageInput.value;
+            console.log("Email:", email);
+            console.log("Subject:", subject);
+            console.log("Message:", message);
+        var templateParams = {
+            to_name: siteData.owner_name, 
+            from_name: name, 
+            subject_line: subject, 
+            message, 
+            email,
+        };
+        try{
+            emailjs.send(serviceId, templateId, templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                window.location.href="/message_sent";
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+        } catch(error){
+            console.log("error: ", error)
         }
     }
-
     const ContactForm = document.getElementById("contactForm"); 
-    ContactForm?.addEventListener("submit", (evt)=>{
-        evt.preventDefault(); 
-        HandleSubmit(evt.target)
+    ContactForm?.addEventListener("submit",(event)=>{
+        event.preventDefault()
+        HandleSubmit()
     })
 </script>
