@@ -28,14 +28,17 @@ export async function post<APIRoute>({params, request} : {params: any, request :
             subject: `${subject}`,
             text: `Hello, someone has sent you a new message through your website: \n\n email: ${email} \n\n ${message}`
         };
-        transporter.sendMail(mailOptions, function (error: any, info: any) {
-                if (error) {
-                    console.log("error: ", error)
-                    return new Response(JSON.stringify({error}), {status: 404})
-
-                }
-            });
-    return new Response(JSON.stringify({message: "success"}), {status: 200})
+        await new Promise((resolve, reject)=>{
+            transporter.sendMail(mailOptions, function (error: any, info: any) {
+                    if (error) {
+                        console.log("error: ", error)
+                        reject(error)
+                        return new Response(JSON.stringify({error}), {status: 404})
+                    }
+                    resolve(null)
+                });
+        })
+        return new Response(JSON.stringify({message: "success"}), {status: 200})
     } catch(error){
         console.log("error : ", error)
        return new Response(JSON.stringify({error}), {status: 404})
