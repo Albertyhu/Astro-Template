@@ -20,10 +20,4 @@ export default defineConfig({
     sitemap(),
   ],
   adapter: netlify(), 
-  vite: {
-    ssr: {
-      // add your package to the `noExternal` list
-      noExternal: ['my-package']
-    }
-  }
 });
