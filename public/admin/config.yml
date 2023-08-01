@@ -32,12 +32,13 @@ collections:
         widget: "list"
         label: "Images"
         required: false
-        field: {label: "Image", name: "image", widget: "image"}
+        field: 
+          - {label: "Image", name: "image", choose_url: "true", widget: "image"}
       - name: "tags"
         widget: "list"
         label: "Tags"
         required: false
-        field: {label: "Tag", name: "tag", widget: "string"}
+        fields: {label: "Tag", name: "tag", widget: "string"}
       - name: "body"
         widget: "markdown"
         label: "Body"
