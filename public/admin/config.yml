@@ -3,7 +3,7 @@ backend:
   branch: "main"
 publish_mode: "editorial_workflow"
 media_folder: "src/assets/uploads"
-public_folder: "/assets"
+public_folder: "/assets/uploads"
 collections:
   - name: "posts"
     label: "Blog Posts"
