@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+import { Image } from 'astro:assets'; 
+// const demo = import.meta.glob("../assets/images/*")
+// const keys = Object.keys(demo)
+// var arr = []
+// for(var i in demo){
+//   arr.push(await demo[i]())
+// }
+
+// console.log(arr)
+// var selected  = arr[0];
+ const customStyle = `h-auto w-11/12 mx-auto overflow-hidden object-cover`
+const pathway ="../assets/images/Ancient-City-Walls-Dubrovnik-5.jpg"
+var selected = await import(pathway)
+ console.log("selected: ", selected)
+//const filenames = import.meta.globEagar("../assets/uploads/*")
+//console.log("filenames: ", filenames)
+---
+  <div
+    class = {customStyle ? customStyle :"h-auto w-auto mx-auto overflow-hidden object-cover "}
+  >
+  <Image 
+    src = {selected.default}
+    alt = "Image"
+    width={1000}
+    height = {1000}
+    class = "w-full h-full"
+  />
+  </div>

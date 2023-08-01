@@ -1,13 +1,34 @@
 ---
 export const prerender = true;
+import { Image } from 'astro:assets'; 
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Image from "@/assets/uploads/water-sea-waves-photography-sports-surfing-underwater-1920x1200-wallpaper_www.wallmay.com_43.jpg"
+import ImageComponent from '@/components/imageComponent.astro'
+const filename = 'Ancient-City-Walls-Dubrovnik-5.jpg'
 
+const demo = import.meta.glob(`../assets/images/*`)
+console.log("demo type: ", typeof demo)
+const keys = Object.keys(demo)
+
+var arr = []
+for(var i in demo){
+  arr.push(await demo[i]())
+}
+
+var selected  = arr[0];
+const customStyle = `h-auto w-11/12 mx-auto overflow-hidden object-cover `
 ---
 <BaseLayout pageTitle = "Home Page" >
   <h2>Template</h2>
-  <img 
-    src = {Image.src} 
-    alt = "Main Image"
-  />
+  <div
+    class = {customStyle ? customStyle :"h-auto w-auto mx-auto overflow-hidden object-cover "}
+  >
+    <Image 
+      src = {selected.default}
+      alt = "example"
+      width = {selected.default.width}}
+      height = {selected.default.height}
+      class = "w-full h-auto"
+    />
+  </div>
+  <ImageComponent />
 </BaseLayout>

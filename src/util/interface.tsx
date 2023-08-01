@@ -34,3 +34,7 @@ export interface ImageMetadata {
   height: number;
   format: string;
 }
+
+export interface GlobObjectType {
+  [key: string]: () => Promise<any>; // Change 'any' to the actual type of the image if known
+}
