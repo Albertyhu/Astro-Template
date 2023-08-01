@@ -33,7 +33,7 @@ collections:
         label: "Images"
         required: "false"
         fields: 
-          - {label: "Image", name: "image", choose_url: "true", widget: "image"}
+          - {label: "Image", name: "url", choose_url: "true", widget: "image"}
           - {label: "alt", name: "alt", widget: "string"}
       - name: "tags"
         widget: "list"
