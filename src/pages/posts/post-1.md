@@ -4,12 +4,8 @@ title: My First Blog Post
 pubDate: 2022-07-01T00:00:00.000Z
 description: This is the first post of my new Astro blog.
 author: Astro Learner
-images:
-  - /assets/dsc_0244.jpg
-tags:
-  - tag: blogging
-  - tag: learning in public
-  - tag: astro
+images: []
+tags: []
 ---
 
 Published on: 2022-07-01

@@ -6,9 +6,9 @@ description: I changed image to url.
 author: TheLastSliceOfPizza
 images:
   - alt: Gopher
-    image: /assets/9ljn35t99td31.jpg
-  - alt: 'Deep rock galactic '
-    image: /assets/all-legendary.jpg
+    image: /assets/uploads/9ljn35t99td31.jpg
+  - alt: 'Deep rock galactic'
+    image: /assets/uploads/all-legendary.jpg
 tags:
   - tag: DRG
   - tag: Random
