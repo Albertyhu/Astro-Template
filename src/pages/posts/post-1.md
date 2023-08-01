@@ -6,7 +6,7 @@ description: This is the first post of my new Astro blog.
 author: Astro Learner
 images:
   - alt: cabbage guy
-    url: /assets/the-scream-cabbage-merchant.jpg
+    url: /assets/uploads/the-scream-cabbage-merchant.jpg
 tags: []
 ---
 
