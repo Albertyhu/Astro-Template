@@ -1,10 +1,12 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: My Second Blog Post
+pubDate: 2022-07-08T00:00:00.000Z
+description: 'After learning some Astro, I couldn''t stop!'
 author: Astro Learner
-description: After learning some Astro, I couldn't stop!
-images: []
-pubDate: 2022-07-08
+images:
+  - alt: DRG
+    url: /assets/all-legendary.jpg
 tags: []
 ---
 
