@@ -34,14 +34,7 @@ const imageFiles = import.meta.glob("../../assets/uploads/*");
     {
         posts ? 
         <div class = "grid sm:grid-cols-2 md:grid-cols-3 sm:gap-5">
-            {posts.map(async (post: any) =>{
-              //retrieve thumbnail of the posts
-              if(post.frontmatter.images && post.frontmatter.images.length >0 ){
-                const thumbnail = await RetrieveImageFromGlob(post.frontmatter.images[0].url, imageFiles); 
-                return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {thumbnail} />
-              }
-              return <BlogPreview {...post.frontmatter} url = {post.url}/>
-            })}
+            {posts.map((post: any) =><BlogPreview {...post.frontmatter} url = {post.url} />)}
         </div>
         : 
         <p>This author hasn't published any posts yet.</p>

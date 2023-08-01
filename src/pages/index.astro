@@ -1,9 +1,10 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
-
+import ContentWrapper from '@/layouts/ContentWrapper.astro';
 ---
 <BaseLayout pageTitle = "Home Page" >
-  <h2>Template</h2>
-
+  <ContentWrapper>
+    <h2>Template</h2>
+  </ContentWrapper>
 </BaseLayout>
