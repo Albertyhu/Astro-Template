@@ -6,7 +6,7 @@ description: 'After learning some Astro, I couldn''t stop!'
 author: Astro Learner
 images:
   - alt: banner
-    url: /assets/uploads/action-breeds-confidence.jpg
+    url: /src/assets/uploads/action-breeds-confidence.jpg
 tags: []
 ---
 
