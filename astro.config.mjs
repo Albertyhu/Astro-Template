@@ -10,7 +10,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   experimental: {
-    assets: true
+    assets: false
   },
   output: 'server',
   integrations: [

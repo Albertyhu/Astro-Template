@@ -113,8 +113,12 @@ html.dark {
 
 .dark .tagListItem a {
   color: #000000 !important;
-
 }
+
+.dark .blog-preview-panel{
+  background-color: #333333;
+}
+
 /* 
   .dark .mobile-menu{
     background-color: #5b5b5b !important;
