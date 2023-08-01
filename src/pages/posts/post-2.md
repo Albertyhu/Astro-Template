@@ -5,8 +5,8 @@ pubDate: 2022-07-08T00:00:00.000Z
 description: 'After learning some Astro, I couldn''t stop!'
 author: Astro Learner
 images:
-  - alt: surf
-    url: /assets/water-sea-waves-photography-sports-surfing-underwater-1920x1200-wallpaper_www.wallmay.com_43.jpg
+  - alt: banner
+    url: /assets/uploads/action-breeds-confidence.jpg
 tags: []
 ---
 
