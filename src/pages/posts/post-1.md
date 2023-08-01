@@ -7,6 +7,8 @@ author: Astro Learner
 images:
   - alt: 'cabbage guy '
     url: /assets/the-scream-cabbage-merchant.jpg
+  - alt: banner
+    url: /assets/action-breeds-confidence.jpg
 tags: []
 ---
 
