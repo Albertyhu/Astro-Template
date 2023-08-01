@@ -11,6 +11,15 @@ const {
 } = Astro.props; 
 let datePublished : Date | null = pubDate ? new Date(pubDate)  : null; 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const thumbnail = images && images.length ?
+ {
+    src : images[0].url,
+    width: 800,
+    height: 500,
+    format: 'jpg'
+} 
+ : 
+ null; 
 ---
 <div
     class = "rounded-lg box_shadow m-5 bg-white blog-preview-panel"
@@ -34,11 +43,12 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
                 href={url}
             >
                 <img 
-                    src = {images[0].url}
+                    src = {thumbnail.src}
                     alt = {images[0].alt}
                 />
             </a>
         </div>
+        
     }
     <p>
     {author &&

@@ -1,8 +1,13 @@
 ---
 export const prerender = true;
-
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Image from "@/assets/uploads/water-sea-waves-photography-sports-surfing-underwater-1920x1200-wallpaper_www.wallmay.com_43.jpg"
+console.log("image: ", Image)
 ---
 <BaseLayout pageTitle = "Home Page" >
   <h2>Template</h2>
+  <img 
+    src = {Image.src} 
+    alt = "Main Image"
+  />
 </BaseLayout>
