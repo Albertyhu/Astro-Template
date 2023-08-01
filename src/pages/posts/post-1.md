@@ -5,8 +5,8 @@ pubDate: 2022-07-01T00:00:00.000Z
 description: This is the first post of my new Astro blog.
 author: Astro Learner
 images:
-  - alt: cabbage guy
-    url: /assets/uploads/the-scream-cabbage-merchant.jpg
+  - alt: castle
+    url: /src/assets/uploads/castle-in-the-sky.jpg
 tags: []
 ---
 
