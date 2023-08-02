@@ -38,3 +38,9 @@ export interface ImageMetadata {
 export interface GlobObjectType {
   [key: string]: () => Promise<any>; // Change 'any' to the actual type of the image if known
 }
+
+export type UsePaginationType = {
+    currentPage: number,
+    totalCount: number,
+    pageSize: number, 
+} 

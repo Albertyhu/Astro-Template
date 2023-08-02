@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; 
+const allPosts = await Astro.glob("../posts/*.md")
+const PAGE_SIZE = 6;
+const totalPages : number = Math.round(allPosts.length/PAGE_SIZE) + allPosts.length%PAGE_SIZE;
+const {page} = Astro.params; 
+let inBound = page && typeof parseInt(page) === "number" && parseInt(page) <= totalPages; 
+const {} = Astro.props;  
+---
+<BaseLayout pageTitle = "Blog posts">
+    {inBound ? 
+    <div></div>
+    :
+    <div class = "w-full h-auto">
+        <h2
+            class = "font-bold text-center my-40"
+        >404 Error: The page you are looking for does not exist.</h2>
+    </div>
+    }
+</BaseLayout>
