@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContentWrapper from "@/layouts/ContentWrapper.astro";
+import LogoComponent from "@/components/logoComponent.astro";
+import HomeButton from "@/components/buttons/home_button.astro";
+import BackButton from "@/components/buttons/back_button.astro";
+---
+<BaseLayout pageTitle = "404 Error Page">
+    <ContentWrapper>
+        <LogoComponent customStyle = "w-fit h-auto mx-auto mt-10" />
+        <div class = "w-full h-auto">
+            <h2
+                class = "font-bold text-center"
+            >404 Error: The page you are looking for does not exist.</h2>
+        </div>
+        <HomeButton customStyle = "my-10" />
+        <BackButton customStyle = "my-10" />
+    </ContentWrapper>
+</BaseLayout>

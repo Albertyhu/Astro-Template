@@ -1,20 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'; 
+import RenderPagination from '@/components/paginatedBlog/renderPagination.tsx';
 const allPosts = await Astro.glob("../posts/*.md")
-const PAGE_SIZE = 6;
+const PAGE_SIZE : number = 6;
 const totalPages : number = Math.round(allPosts.length/PAGE_SIZE) + allPosts.length%PAGE_SIZE;
+
+// export async function getStaticPaths() {
+// }   
 const {page} = Astro.params; 
 let inBound = page && typeof parseInt(page) === "number" && parseInt(page) <= totalPages; 
+if(!inBound) {
+    return Astro.redirect("/error")
+}
 const {} = Astro.props;  
 ---
 <BaseLayout pageTitle = "Blog posts">
-    {inBound ? 
-    <div></div>
-    :
     <div class = "w-full h-auto">
-        <h2
-            class = "font-bold text-center my-40"
-        >404 Error: The page you are looking for does not exist.</h2>
+            <RenderPagination 
+                pageSize = {PAGE_SIZE}
+                totalCount = {allPosts.length as number}
+                currentPage = {1}
+                client:only = "react"
+            />
     </div>
-    }
 </BaseLayout>

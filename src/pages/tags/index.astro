@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-
+import ContentWrapper from "@/layouts/ContentWrapper.astro";
 
 const allPosts = await Astro.glob("../posts/*.md"); 
 var allTags = ((allPosts.map(post => post.frontmatter.tags)).flat()).map(item => item.tag)
@@ -10,14 +10,16 @@ const tags = [...new Set(allTags)];
 <BaseLayout
     pageTitle="Search Posts By Index"
 >
-    <h1
-        class="font-bold text-2xl"
-    >Search posts by index</h1>
-    <ul>
-        {tags && tags.length > 0 && 
-            tags.map(tag => <li class = "hover:underline hover:font-bold my-5 cursor-pointer capitalize rounded-[0.5em] border-dotted border-2 text-[1.5rem] border-[#a1a1a1] p-1 bg-[#F8FCFD] tagListItem">
-                <a href = {`../tags/${tag}`}>{tag}</a>
-                </li>)
-        }
-    </ul>
+    <ContentWrapper>
+        <h1
+            class="font-bold text-2xl text-center mt-10"
+        >Search posts by index</h1>
+        <ul>
+            {tags && tags.length > 0 && 
+                tags.map(tag => <li class = "hover:underline hover:font-bold my-5 cursor-pointer capitalize rounded-[0.5em] border-dotted border-2 text-[1.5rem] border-[#a1a1a1] p-1 bg-[#F8FCFD] tagListItem">
+                    <a href = {`../tags/${tag}`}>{tag}</a>
+                    </li>)
+            }
+        </ul>
+    </ContentWrapper>
 </BaseLayout>

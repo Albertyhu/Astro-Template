@@ -1,0 +1,11 @@
+---
+const { customStyle } = Astro.props; 
+---
+<div
+    class = {`btn-primary ${customStyle}`}
+    id="HomeButton"
+>Go Home</div>
+<script>
+    const button = document.getElementById("HomeButton")
+    button?.addEventListener("mousedown", ()=>{window.location.href = "/"})
+</script>
