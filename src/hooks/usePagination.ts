@@ -19,7 +19,7 @@ function usePagination({ currentPage, totalCount,  pageSize } : UsePaginationTyp
     } 
 
     //useMemo is used for efficiency and to cache the results of the Pagination to be used again if the dependencies don't change
-    const Pagination = useMemo(() => {
+    const Pagination = () => {
 
         //Math.ceil is used to calculate total pages to include the remainder of the rows in the last page
         const totalPages = Math.ceil(totalCount / pageSize);
@@ -95,9 +95,9 @@ function usePagination({ currentPage, totalCount,  pageSize } : UsePaginationTyp
             return[firstPage, DOTS, ...midRange]
         }
 
-    }, [totalCount, pageSize, consecPage, currentPage])
+    }
 
-    return Pagination; 
+    return Pagination(); 
 }
 
 export default usePagination;

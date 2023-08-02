@@ -1,10 +1,9 @@
 import usePagination from "../../hooks/usePagination.ts"; 
-import { DOTS } from "../../util/dots.js"
+//import { DOTS } from "../../util/dots.js"
 import type { UsePaginationType } from "@/util/interface.tsx";
 
-const RenderPagination = ({ pageSize, 
-    totalCount, 
-    currentPage} : UsePaginationType) =>{
+const RenderPagination = (props : UsePaginationType) =>{
+    const {pageSize, totalCount, currentPage} = props; 
     const array = usePagination({currentPage, totalCount, pageSize})
     console.log("array: ", array)
     return(
