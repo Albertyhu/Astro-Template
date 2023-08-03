@@ -15,7 +15,7 @@ let datePublished : Date | null = pubDate ? new Date(pubDate)  : null;
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 ---
 <div
-    class = "rounded-lg box_shadow m-5 bg-white blog-preview-panel"
+    class = "rounded-lg box_shadow bg-white blog-preview-panel"
     id="blog-preview-panel"
 >
     <div
@@ -56,7 +56,6 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
     </p>
     {description &&
         <p><b>Description: </b>{description}</p>
-
     }
     {tags && tags.length > 0 &&
         <TagList tags = {tags} />

@@ -1,11 +1,14 @@
-export interface postType {
-    title: string, 
-    pubDate: Date, 
-    description: string, 
-    author: string, 
-    images: Array<ImageType | string>, 
-    tags: Array<TagType | string>, 
-    body: HTMLElement | string, 
+export interface PostType {
+    frontmatter: {
+        layout: string,    
+        title: string, 
+        pubDate: Date, 
+        description: string, 
+        author: string, 
+        images: Array<ImageType | string> | null | undefined, 
+        tags: Array<TagType> | null | undefined, 
+        body: HTMLElement | string | null | undefined, 
+    }
 }
 
 export type ImageType = string; 
@@ -44,3 +47,9 @@ export type UsePaginationType = {
     totalCount: number,
     pageSize: number, 
 } 
+
+export type SearchQueryType = {
+    query : string, 
+    list: Array<any>, 
+} 
+
