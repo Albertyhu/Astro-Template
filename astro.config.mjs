@@ -20,4 +20,9 @@ export default defineConfig({
     sitemap(),
   ],
   adapter: netlify(), 
+  vite: {
+    ssr: {
+      external: ['svgo']
+    }
+  }
 });

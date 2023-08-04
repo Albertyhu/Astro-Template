@@ -8,17 +8,5 @@ const {
     id="SearchBar"
     class = "grid whitespace-nowrap userselect-none border-none mt-10"
 >
-    <SearchInput client:load/>
+    <SearchInput client:load />
 </form>
-<script>
-    const SearchButton = document.getElementById("SearchButton"); 
-    const QueryInput : HTMLElement | null = document.getElementById("QueryInput")
-    const SubmitEvent = (event : any): void => {
-        event.preventDefault();
-        const Query = QueryInput?.value as string;
-        console.log("query: ", Query);
-        //window.location.href =`/blog_post/search/${Query.trim()}`
-    }
-    SearchButton?.addEventListener("mousedown", SubmitEvent)
-
-</script>
