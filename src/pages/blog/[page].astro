@@ -42,7 +42,7 @@ const {
     PAGE_SIZE
     } = Astro.props;  
 let inBound = page && typeof parseInt(page) === "number" && parseInt(page) <= totalPages; 
-if(!inBound) {
+if(!inBound && totalPages != 0) {
     return Astro.redirect("/error")
 }
 ---
@@ -55,14 +55,21 @@ if(!inBound) {
             class = "font-bold text-2xl text-center mt-10"
         >Blog posts</h1>
         <Searchbar />
-        <RenderPagination 
-            pageSize = {PAGE_SIZE}
-            totalCount = {totalPosts as number}
-            currentPage = {parseInt(page)}
-            totalPages = {totalPages}
-            isMobile = {true}
-            client:load
-        />
+        {totalPosts === 0 &&
+            <h2
+                class ="text-center text-2xl my-5"
+            >There are currently no blog posts published at the moment.</h2>
+        }
+        {totalPages > 1 &&
+            <RenderPagination 
+                pageSize = {PAGE_SIZE}
+                totalCount = {totalPosts as number}
+                currentPage = {parseInt(page)}
+                totalPages = {totalPages}
+                isMobile = {true}
+                client:load
+            />
+        }
         {paginatedArray && paginatedArray.length > 0 && 
             <div class = "grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
                 {paginatedArray.map(async (post :PostType) =>{
@@ -74,15 +81,17 @@ if(!inBound) {
                 })}
             </div>
         }
-        <div class = "w-full h-auto">
-                <RenderPagination 
-                    pageSize = {PAGE_SIZE}
-                    totalCount = {totalPosts as number}
-                    currentPage = {parseInt(page)}
-                    totalPages = {totalPages}
-                    isMobile = {false}
-                    client:load
-                />
-        </div>
+        {totalPages > 1 &&
+            <div class = "w-full h-auto">
+                    <RenderPagination 
+                        pageSize = {PAGE_SIZE}
+                        totalCount = {totalPosts as number}
+                        currentPage = {parseInt(page)}
+                        totalPages = {totalPages}
+                        isMobile = {false}
+                        client:load
+                    />
+            </div>
+        }
     </div>
 </BaseLayout>
