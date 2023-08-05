@@ -1,26 +1,87 @@
 ---
+export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro'; 
 import RenderPagination from '@/components/paginatedBlog/renderPagination.tsx';
-const allPosts = await Astro.glob("../posts/*.md")
-const PAGE_SIZE : number = 6;
-const totalPages : number = Math.round(allPosts.length/PAGE_SIZE) + allPosts.length%PAGE_SIZE;
+import { getPaginatedArray } from "@/hooks/blogHooks"; 
+import Searchbar from '@/components/search/searchbar.astro';
+import BlogPreview from '@/components/blogComponents/previewLink.astro';
+import { RetrieveImageFromGlob } from "@/hooks/imageHooks";
+import type { PostType } from '@/util/interface';
 
-// export async function getStaticPaths() {
-// }   
+
+export async function getStaticPaths() {
+    const PAGE_SIZE : number = 6;
+    const allPosts : Array<PostType> | [] = await Astro.glob("../posts/*.md")
+    const totalPages : number = Math.ceil(allPosts.length/PAGE_SIZE) + allPosts.length%PAGE_SIZE;
+    const imageFiles = import.meta.glob("../../assets/uploads/*"); 
+    const keys = Object.keys(imageFiles)
+    var staticPaths : Array<any> = []; 
+    for(var i = 1; i <= totalPages; i++){
+        var paginatedArray = getPaginatedArray(allPosts, i, PAGE_SIZE)
+        var path = {
+            params: {page : i},
+            props:{
+                totalPages,
+                imageFiles, 
+                paginatedArray, 
+                totalPosts: allPosts.length, 
+                PAGE_SIZE,
+            }
+        }
+        staticPaths.push(path)
+    }
+    return staticPaths; 
+}   
 const {page} = Astro.params; 
+const {
+    totalPages,
+    imageFiles,
+    paginatedArray,
+    totalPosts,
+    PAGE_SIZE
+    } = Astro.props;  
 let inBound = page && typeof parseInt(page) === "number" && parseInt(page) <= totalPages; 
 if(!inBound) {
     return Astro.redirect("/error")
 }
-const {} = Astro.props;  
 ---
 <BaseLayout pageTitle = "Blog posts">
-    <div class = "w-full h-auto">
-            <RenderPagination 
-                pageSize = {PAGE_SIZE}
-                totalCount = {allPosts.length as number}
-                currentPage = {1}
-                client:load
-            />
+    <div
+    class = "mb-[100px] w-11/12 mx-auto"
+    id="content-wrapper"
+    >
+    <h1 
+            class = "font-bold text-2xl text-center mt-10"
+        >Blog posts</h1>
+        <Searchbar />
+        <RenderPagination 
+            pageSize = {PAGE_SIZE}
+            totalCount = {totalPosts as number}
+            currentPage = {parseInt(page)}
+            totalPages = {totalPages}
+            isMobile = {true}
+            client:load
+        />
+        {paginatedArray && paginatedArray.length > 0 && 
+            <div class = "grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
+                {paginatedArray.map(async (post :PostType) =>{
+                    if(post.frontmatter.images && post.frontmatter.images.length > 0 ){
+                        const thumbnail = await RetrieveImageFromGlob(post.frontmatter.images[0].url, imageFiles); 
+                        return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {thumbnail} />
+                    }
+                    return <BlogPreview {...post.frontmatter} url = {post.url}/>
+                })}
+            </div>
+        }
+        <div class = "w-full h-auto">
+                <RenderPagination 
+                    pageSize = {PAGE_SIZE}
+                    totalCount = {totalPosts as number}
+                    currentPage = {parseInt(page)}
+                    totalPages = {totalPages}
+                    isMobile = {false}
+                    client:load
+                />
+        </div>
     </div>
 </BaseLayout>

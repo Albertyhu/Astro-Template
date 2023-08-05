@@ -14,7 +14,6 @@ function usePagination({ currentPage, totalCount,  pageSize } : UsePaginationTyp
         for (var i = first; i <= last; i++) {
            pageRange.push(i)
         } 
-        console.log("pageRange: " + pageRange)
         return pageRange; 
     } 
 
@@ -23,12 +22,10 @@ function usePagination({ currentPage, totalCount,  pageSize } : UsePaginationTyp
 
         //Math.ceil is used to calculate total pages to include the remainder of the rows in the last page
         const totalPages = Math.ceil(totalCount / pageSize);
-        console.log("totalPages: " + totalPages)
         const firstPage = 1;
         //The idead group of pages to be rendered is the first page, the last page, current page and any of the pages consecutive to the current page
         //If the total number of pages is smaller than the ideal group, execute the following block
         if (totalPages < consecPage + 5) {
-            console.log("case 1")
             const range = createRange(firstPage, totalPages)
             return [...range];
         }
@@ -65,33 +62,23 @@ function usePagination({ currentPage, totalCount,  pageSize } : UsePaginationTyp
         }
 
         if (leftMostPage !== firstPage) {
-            console.log("Added "  + addLeftPage + " left paginations")
             leftMostPage -= addLeftPage; 
         }
 
         if (rightMostPage !== totalPages) {
-            console.log("Added " + addRightPage + " right paginations")
             rightMostPage += addRightPage; 
         }
-        console.log("leftMostPage: " + leftMostPage)
-        console.log("rightMostPage: " + rightMostPage)
+
         const displayLeftDots = currentPage - consecPage - 1 > 1 ? true : false; 
         const displayRightDots = currentPage + consecPage + 1 < totalPages ? true : false; 
-        console.log("displayLeftDots: " + displayLeftDots)
-        console.log("displayRightDots: " + displayRightDots)
-        
-
         const midRange = createRange(leftMostPage, rightMostPage)
         if (displayLeftDots && displayRightDots) {
-            console.log("case 2")
             return [firstPage, DOTS, ...midRange, DOTS, totalPages]
         }
         if (!displayLeftDots && displayRightDots) {
-            console.log("case 3")
             return[...midRange, DOTS, totalPages]
         }
         if (displayLeftDots && !displayRightDots) {
-            console.log("case 4")
             return[firstPage, DOTS, ...midRange]
         }
 

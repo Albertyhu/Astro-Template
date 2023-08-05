@@ -4,7 +4,7 @@ import RenderRecentSearch from './recentSearches';
 
 const SearchInput = () =>{
     const [query, setQuery] = useState<string>(""); 
-    const [historyResults, setSearchHistory ] = useState<Array<string>>([""])
+    const [historyResults, setSearchHistory ] = useState<Array<string>>([])
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setQuery(event.target?.value); 
     }

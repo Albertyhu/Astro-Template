@@ -5,13 +5,16 @@ export interface PostType {
         pubDate: Date, 
         description: string, 
         author: string, 
-        images: Array<ImageType | string> | null | undefined, 
+        images: Array<ImageType> | null | undefined, 
         tags: Array<TagType> | null | undefined, 
         body: HTMLElement | string | null | undefined, 
     }
 }
 
-export type ImageType = string; 
+export type ImageType = {
+    url: string,
+    alt: string,
+}; 
 
 export type TagType = {
     tag: string, 
@@ -48,8 +51,18 @@ export type UsePaginationType = {
     pageSize: number, 
 } 
 
+export type RenderPaginationType = {
+    currentPage: number,
+    totalCount: number,
+    pageSize: number, 
+    totalPages: number, 
+    isMobile: boolean, 
+} 
+
 export type SearchQueryType = {
     query : string, 
     list: Array<any>, 
 } 
+
+
 
