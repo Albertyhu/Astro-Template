@@ -7,7 +7,8 @@ author: Astro Learner
 images:
   - alt: castle
     url: /src/assets/uploads/castle-in-the-sky.jpg
-tags: []
+tags: 
+  - tag: mermaids
 ---
 
 Published on: 2022-07-01

@@ -30,9 +30,9 @@ const RenderRecentSearch = (props : RecentSearchType) =>{
                     >Recent searches</h3>
                 </div>
                 <ul
-                    className = "list-none list-indented"
+                    className = "list-none list-indented RecentSearches"
                 >
-                    {historyResults && historyResults.length > 0 && 
+                    {historyResults && historyResults.length > 0 &&
                         historyResults.map((result,index) => 
                         <RenderItem 
                         historyResults={historyResults}
@@ -66,9 +66,11 @@ const RenderItem = ( props : HistoryResultType ) =>{
         index,
     } = props; 
     const deleteValue = () =>{
-        var arr = historyResults; 
+        var arr = [...historyResults]; 
         arr.splice(index, 1)
+        console.log("arr: ", arr)
         setSearchHistory(arr); 
+        console.log("search history: ", historyResults)
         localStorage.setItem("searchHistory", JSON.stringify(arr))
     }
     return(
@@ -77,7 +79,10 @@ const RenderItem = ( props : HistoryResultType ) =>{
         >
             <span
                 className="hover:font-bold "
-                onClick ={()=>setQuery(result)}
+                onClick ={async ()=>{
+                    await setQuery(result)
+                    setSearchHistory([])
+                }}
             >{result}</span>
             <span 
                 className ="text-[#ff0000] hover:font-bold"

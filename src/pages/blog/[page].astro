@@ -12,9 +12,10 @@ import type { PostType } from '@/util/interface';
 export async function getStaticPaths() {
     const PAGE_SIZE : number = 6;
     const allPosts : Array<PostType> | [] = await Astro.glob("../posts/*.md")
-    const totalPages : number = Math.ceil(allPosts.length/PAGE_SIZE) + allPosts.length%PAGE_SIZE;
+    const totalPages : number = Math.ceil(allPosts.length/PAGE_SIZE);
+    const add = Math.ceil(allPosts.length/PAGE_SIZE)
+    const remainder = allPosts.length%PAGE_SIZE; 
     const imageFiles = import.meta.glob("../../assets/uploads/*"); 
-    const keys = Object.keys(imageFiles)
     var staticPaths : Array<any> = []; 
     for(var i = 1; i <= totalPages; i++){
         var paginatedArray = getPaginatedArray(allPosts, i, PAGE_SIZE)

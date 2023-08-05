@@ -57,6 +57,7 @@ export type RenderPaginationType = {
     pageSize: number, 
     totalPages: number, 
     isMobile: boolean, 
+    search_query?: string | null | undefined, 
 } 
 
 export type SearchQueryType = {

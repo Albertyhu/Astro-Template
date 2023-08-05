@@ -13,9 +13,11 @@ const SearchInput = () =>{
         var arr = data ? JSON.parse(data) : [];
         if(query != "" ){
             arr.push(query)
+            arr = [...new Set(arr)]
             localStorage.setItem("searchHistory", JSON.stringify(arr))
         }
-        //window.location.href = `/blog/${query}`
+        setSearchHistory([])
+        window.location.href = `/blog/search/${query}/1`
     }
 
     useEffect(()=>{
@@ -41,7 +43,7 @@ const SearchInput = () =>{
                         placeholder = "Type here to search a blog post"
                         value = {query}
                         id="QueryInput"
-                        className = "rounded-lg w-full px-5"
+                        className = "rounded-lg w-full px-5 SearchInput"
                         onChange={(event)=>onChangeHandler(event)}
                     />
                 </div>

@@ -80,6 +80,10 @@
     @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer border-none text-center w-fit select-none text-black mx-auto hover:bg-[#a2a2a2] bg-[#dbdbdb] box_shadow whitespace-nowrap [&>*]:inline-flex;
   }
 
+  .dark .btn-primary{
+    @apply bg-[#333333] border-white border-2 text-white;
+  }
+
   .btn-secondary {
     @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer border-black border-2 text-center w-fit select-none text-white mx-auto hover:bg-[#535353] bg-[#333333] box_shadow whitespace-nowrap [&>*]:inline-flex block;
   }
@@ -97,6 +101,14 @@
   }
   .selected {
     @apply font-bold;
+  }
+
+  .dark .SearchInput{
+    @apply bg-[#dbdbdb] text-black;
+  }
+
+  .dark .RecentSearches{
+    @apply text-black;
   }
 }
 
