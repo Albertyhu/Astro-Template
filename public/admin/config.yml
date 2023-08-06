@@ -28,7 +28,7 @@ collections:
       - name: "author"
         widget: "string"
         label: "Author"
-      - name: "image"
+      - name: "featured_image"
         widget: "image"
         label: "Featured Image"
         choose_url: "true"
