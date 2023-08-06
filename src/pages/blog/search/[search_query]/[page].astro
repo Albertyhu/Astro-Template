@@ -16,16 +16,29 @@ const {
 
 const PAGE_SIZE = 6; 
 
-const allPosts : Array<PostType> | [] = await Astro.glob("../../../posts/*md")
-const searchResults = SearchQuery(search_query as string, allPosts); 
-const totalPages : number = Math.ceil(searchResults.length/PAGE_SIZE);
-const imageFiles = import.meta.glob("../../../../assets/uploads/*"); 
+var allPosts : Array<PostType> | [] = []; 
+var totalPages : number = 0;
+var searchResults : Array<PostType> | [] = []; 
+var imageFiles = {}
+try{
+    allPosts = await Astro.glob("../../../posts/*.md")
+} catch(error){
+    allPosts = []
+}
+
+try{
+    imageFiles = import.meta.glob("../../../../assets/uploads/*"); 
+} catch(error){
+
+}
+    searchResults = SearchQuery(search_query as string, allPosts); 
+    totalPages = Math.ceil(searchResults.length/PAGE_SIZE);
 const pageNumber = page ? parseInt(page) : null; 
 let inBound = page && typeof pageNumber === "number" && pageNumber <= totalPages; 
 if(!inBound && totalPages != 0) {
     return Astro.redirect("/error")
 }
-var paginatedArray = pageNumber ? getPaginatedArray(searchResults, pageNumber, PAGE_SIZE) : [];
+var paginatedArray = pageNumber && searchResults.length > 0? getPaginatedArray(searchResults, pageNumber, PAGE_SIZE) : [];
 ---
 <BaseLayout pageTitle = "Blog posts">
     <div

@@ -2,7 +2,10 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro'; 
 import RenderPagination from '@/components/paginatedBlog/renderPagination.tsx';
-import { getPaginatedArray } from "@/hooks/blogHooks"; 
+import { 
+    getPaginatedArray,
+    createStaticPathArray,
+ } from "@/hooks/blogHooks"; 
 import Searchbar from '@/components/search/searchbar.astro';
 import BlogPreview from '@/components/blogComponents/previewLink.astro';
 import { RetrieveImageFromGlob } from "@/hooks/imageHooks";
@@ -11,27 +14,26 @@ import type { PostType } from '@/util/interface';
 
 export async function getStaticPaths() {
     const PAGE_SIZE : number = 6;
-    const allPosts : Array<PostType> | [] = await Astro.glob("../posts/*.md")
-    const totalPages : number = Math.ceil(allPosts.length/PAGE_SIZE);
-    const add = Math.ceil(allPosts.length/PAGE_SIZE)
-    const remainder = allPosts.length%PAGE_SIZE; 
-    const imageFiles = import.meta.glob("../../assets/uploads/*"); 
-    var staticPaths : Array<any> = []; 
-    for(var i = 1; i <= totalPages; i++){
-        var paginatedArray = getPaginatedArray(allPosts, i, PAGE_SIZE)
-        var path = {
-            params: {page : i},
-            props:{
-                totalPages,
-                imageFiles, 
-                paginatedArray, 
-                totalPosts: allPosts.length, 
-                PAGE_SIZE,
-            }
-        }
-        staticPaths.push(path)
+    var allPosts : Array<PostType> | [] = []; 
+    var totalPages : number = 0
+    try{
+        allPosts = await Astro.glob("../posts/*.md")
+        totalPages = Math.ceil(allPosts.length/PAGE_SIZE);
+    } catch(error){
+        allPosts = []
     }
-    return staticPaths; 
+    var imageFiles = {}
+    try{
+        imageFiles = import.meta.glob("../../assets/uploads/*"); 
+    } catch (error){
+        imageFiles = {}
+    }
+    return createStaticPathArray({
+        allPosts, 
+        PAGE_SIZE,
+        totalPages, 
+        imageFiles, 
+    })
 }   
 const {page} = Astro.params; 
 const {

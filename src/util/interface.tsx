@@ -65,5 +65,9 @@ export type SearchQueryType = {
     list: Array<any>, 
 } 
 
-
-
+export type CreateStaticPathArrayType = {
+    allPosts: Array<PostType>, 
+    PAGE_SIZE: number,
+    totalPages: number, 
+    imageFiles: object, 
+}
