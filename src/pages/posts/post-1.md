@@ -8,6 +8,10 @@ featured_image: /src/assets/uploads/9ljn35t99td31.jpg
 images:
   - alt: castle
     url: /src/assets/uploads/castle-in-the-sky.jpg
+  - alt: castle
+    url: /src/assets/uploads/castle-in-the-sky.jpg
+  - alt: castle
+    url: /src/assets/uploads/castle-in-the-sky.jpg
 tags:
   - tag: mermaids
 ---

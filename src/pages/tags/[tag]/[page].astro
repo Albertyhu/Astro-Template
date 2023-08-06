@@ -1,13 +1,14 @@
 ---
 export const prerender = true; 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import RenderPagination from '@/components/paginatedBlog/renderPagination.tsx';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RenderPagination from '../../../components/paginatedBlog/renderPagination.tsx';
 import { 
     createStaticPathArray,
- } from "@/hooks/blogHooks"; 
- import BlogPreview from '@/components/blogComponents/previewLink.astro';
-import { RetrieveImageFromGlob } from "@/hooks/imageHooks";
-import type { PostType } from '@/util/interface';
+    createStaticPathArrayForTags, 
+ } from "../../../hooks/blogHooks"; 
+ import BlogPreview from '../../../components/blogComponents/previewLink.astro';
+import { RetrieveImageFromGlob } from "../../../hooks/imageHooks";
+import type { PostType } from '../../../util/interface';
 
 export async function getStaticPaths() {
     const PAGE_SIZE : number = 6;
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
     var totalPages : number = 0
     try{
         allPosts = await Astro.glob("../posts/*.md") ;
-        totalPages = Math.ceil(allPosts.length/PAGE_SIZE);
+       // totalPages = Math.ceil(allPosts.length/PAGE_SIZE);
     } catch (error){
         allPosts = []; 
     }
@@ -37,7 +38,10 @@ export async function getStaticPaths() {
     //     }
     // })
 }
-const { tag } = Astro.params; 
+const { 
+    tag,
+    page
+ } = Astro.params; 
 const { 
     totalPages,
     imageFiles, 

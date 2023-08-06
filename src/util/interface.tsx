@@ -5,6 +5,7 @@ export interface PostType {
         pubDate: Date, 
         description: string, 
         author: string, 
+        featured_image: string, 
         images: Array<ImageType> | null | undefined, 
         tags: Array<TagType> | null | undefined, 
         body: HTMLElement | string | null | undefined, 
@@ -65,9 +66,15 @@ export type SearchQueryType = {
     list: Array<any>, 
 } 
 
-export type CreateStaticPathArrayType = {
+export interface CreateStaticPathArrayType {
     allPosts: Array<PostType>, 
     PAGE_SIZE: number,
     totalPages: number, 
     imageFiles: object, 
+}
+
+export interface TagStaticPathArrayType extends CreateStaticPathArrayType{
+    uniqueTags : Array<{
+        tag: string, 
+    }>
 }

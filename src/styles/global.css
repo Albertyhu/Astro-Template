@@ -34,7 +34,6 @@
     @apply bg-slate-100;
   }
 
-  
   .dark .mobile-menu{
     @apply bg-slate-700 text-white;
   }

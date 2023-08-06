@@ -74,9 +74,8 @@ if(!inBound && totalPages != 0) {
         {paginatedArray && paginatedArray.length > 0 && 
             <div class = "grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
                 {paginatedArray.map(async (post :PostType) =>{
-                    if(post.frontmatter.images && post.frontmatter.images.length > 0 ){
-                        const thumbnail = await RetrieveImageFromGlob(post.frontmatter.images[0].url, imageFiles); 
-                        return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {thumbnail} />
+                    if(post.frontmatter.featured_image){
+                        return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {post.frontmatter.featured_image} />
                     }
                     return <BlogPreview {...post.frontmatter} url = {post.url}/>
                 })}

@@ -28,7 +28,7 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
             class = "cursor-pointer text-center text-2xl"
             ><h2 class = "font-bold">{title}</h2></a>
     }
-    {images && images.length > 0 && thumbnail &&
+    {thumbnail &&
         <div
         class = "object-fit cursor-pointer"
         >
@@ -36,8 +36,8 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
                 href={url}
             >
                 <img
-                    src = {thumbnail.default.src}
-                    alt = {images[0].alt}
+                    src = {thumbnail}
+                    alt = {`${title} featured image`}
                     class = "w-full h-full"
                 />
             </a>

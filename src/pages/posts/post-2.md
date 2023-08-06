@@ -7,7 +7,7 @@ author: Astro Learner
 featured_image: /src/assets/uploads/action-breeds-confidence.jpg
 images:
   - alt: banner
-    url: 
+    url: /src/assets/uploads/action-breeds-confidence.jpg
 tags: []
 ---
 
