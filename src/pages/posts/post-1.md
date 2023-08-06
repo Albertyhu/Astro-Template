@@ -4,11 +4,11 @@ title: My First Blog Post
 pubDate: 2022-07-01T00:00:00.000Z
 description: This is the first post of my new Astro blog.
 author: Astro Learner
-main_image: /src/assets/uploads/castle-in-the-sky.jpg
+image: /src/assets/uploads/9ljn35t99td31.jpg
 images:
   - alt: castle
     url: /src/assets/uploads/castle-in-the-sky.jpg
-tags: 
+tags:
   - tag: mermaids
 ---
 
