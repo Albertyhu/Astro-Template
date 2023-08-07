@@ -73,8 +73,19 @@ export interface CreateStaticPathArrayType {
     imageFiles: object, 
 }
 
-export interface TagStaticPathArrayType extends CreateStaticPathArrayType{
-    uniqueTags : Array<{
+export interface TagStaticPathArrayType {
+    allPosts: Array<PostType>, 
+    PAGE_SIZE: number,
+}
+
+export interface PathArray_TagsAndPageType {
+    params: {
         tag: string, 
-    }>
+        page: number, 
+    },
+    props: {
+        totalPages: number,
+        paginatedArray: Array<PostType>, 
+        totalPosts: number, 
+    }
 }

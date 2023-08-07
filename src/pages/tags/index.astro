@@ -17,7 +17,7 @@ const tags = [...new Set(allTags)];
         <ul>
             {tags && tags.length > 0 && 
                 tags.map(tag => <li class = "hover:underline hover:font-bold my-5 cursor-pointer capitalize rounded-[0.5em] border-dotted border-2 text-[1.5rem] border-[#a1a1a1] p-1 bg-[#F8FCFD] tagListItem">
-                    <a href = {`../tags/${tag}`}>{tag}</a>
+                    <a href = {`../tags/${tag}/1`}>{tag}</a>
                     </li>)
             }
         </ul>

@@ -1,63 +1,55 @@
 ---
 export const prerender = true; 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import RenderPagination from '@/components/paginatedBlog/renderPagination.tsx';
+import ContentWrapper from '@/layouts/ContentWrapper.astro';
+import RenderPagination from '../../components/paginatedBlog/renderTagPagination.tsx';
 import { 
     createStaticPathArray,
- } from "@/hooks/blogHooks"; 
- import BlogPreview from '@/components/blogComponents/previewLink.astro';
-import { RetrieveImageFromGlob } from "@/hooks/imageHooks";
-import type { PostType } from '@/util/interface';
+    createStaticPathArrayForTags, 
+ } from "../../hooks/blogHooks"; 
+ import BlogPreview from '../../components/blogComponents/previewLink.astro';
+import { RetrieveImageFromGlob } from "../../hooks/imageHooks";
+import type { PostType } from '../../util/interface';
+import { createRelativeSchema } from 'astro/dist/core/config/schema';
 
 export async function getStaticPaths() {
     const PAGE_SIZE : number = 6;
-    var allPosts : Array<any> = []
-    var totalPages : number = 0
+    var allPosts : Array<PostType> = []
     try{
         allPosts = await Astro.glob("../posts/*.md") ;
-        totalPages = Math.ceil(allPosts.length/PAGE_SIZE);
+       // 
     } catch (error){
         allPosts = []; 
     }
-
-    var imageFiles = {}
-    try{
-        imageFiles = import.meta.glob("../../assets/uploads/*"); 
-    } catch (error){
-        imageFiles = {}
-    }
-
-    const allTags = (allPosts.map((post: any) => post.frontmatter.tags).flat()).map(item => item.tag)
-    const uniqueTags = [...new Set(allTags)]
-    // return uniqueTags.map((tag: string)=> {
-    //     var filteredPosts = allPosts.filter((post : any) => post.frontmatter.tags?.some((item : {tag: string})=>item.tag === tag))
-    //     return{
-    //         params: {tag},
-    //         props: {posts: filteredPosts}
-    //     }
-    // })
+    var staticArray = createStaticPathArrayForTags({allPosts, PAGE_SIZE})
+    return staticArray;
 }
-const { tag } = Astro.params; 
+
+const { 
+    tag
+ } = Astro.params; 
 const { 
     totalPages,
-    imageFiles, 
-    paginatedArray, 
-    totalPosts, 
-    PAGE_SIZE,
+    filteredPosts, 
  } = Astro.props; 
-//console.log(posts)
-const filteredPost = posts.filter((val : any) => val.frontmatter.tags?.some((item :{tag: string}) => item.tag == tag))
 
 ---
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
-  <ul
-      class = "[&>li]:my-5"
-    >
-      {posts && posts.length > 0 && 
-          posts.map((item : any)=> <li class = "hover:font-bold hover:underline">
-                  <a href={item.url}>{item.frontmatter.title}</a>
-              </li>)
-      }
-  </ul>
+    <ContentWrapper>
+        <h1
+            class = "text-2xl font-bold text-center mt-10"
+        >Posts tagged with {tag}</h1>
+        {filteredPosts && filteredPosts.length > 0 ? 
+            <div class = "grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
+                {filteredPosts.map((post : PostType) => {
+                    if(post.frontmatter.featured_image){
+                        return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {post.frontmatter.featured_image} />
+                    }
+                    return <BlogPreview {...post.frontmatter} url = {post.url}/>
+                })}
+            </div>
+            :
+            <div></div>
+        }
+    </ContentWrapper>
 </BaseLayout>
