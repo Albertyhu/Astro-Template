@@ -1,0 +1,28 @@
+---
+const {
+plan, 
+subtitle,
+price,
+headerStyle, 
+circleStyle, 
+} = Astro.props; 
+---
+    <div
+        class = `w-full h-2/12 relative ${headerStyle}`
+    >
+        <div class="relative block absolute bottom-0 left-0 right-0 translate-y-[87.5px]">
+            <h4 class="relative block text-white text-xl font-medium mb-[7px] font-bold">{plan.toUpperCase()}</h4>
+            <div
+                class = `w-[175px] h-[175px] font-['Greycliff',sans-serif] text-white rounded-full relative mx-auto justify-center flex border-[10px] border-white pricingHeader relative ${circleStyle}`
+            >
+                {subtitle && subtitle.length &&
+                    <h3
+                        class = "text-base absolute left-0 right-0 top-[34px]"
+                    >{subtitle}</h3>         
+                }
+                <h2 
+                    class="my-auto block text-4xl"
+                    >{price}</h2>
+            </div>
+        </div>
+    </div>

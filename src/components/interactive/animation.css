@@ -1,0 +1,36 @@
+:root {
+    --fallingDur: 1500ms; 
+    --duration1: 1000ms;
+    --duration3: 3000ms;
+}
+
+.fallingTag{
+    transition: opacity var(--fallingDur) ease, transform var(--fallingDur) ease, visibility; 
+}
+
+.startingFallingAnim {
+    opacity: 0.0; 
+    transform: scale(1.5); 
+    visibility: hidden; 
+}
+
+.RotateInTag {
+  min-height: 30px;
+}
+
+.RotateInTag > *{
+  transition: transform var(--duration1) ease; 
+}
+
+
+.RotateOutAnim{
+  transform: rotateX(-90deg);
+}
+
+.fadeInTag {
+  transition: opacity var(--duration3) ease; 
+}
+
+.fadeOut {
+  opacity: 0; 
+}

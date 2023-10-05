@@ -1,0 +1,24 @@
+---
+const {customStyle} = Astro.props; 
+import SiteData from "@/customization/siteData.json"; 
+const { followUsText } = Astro.props; 
+import LinkedIn from "@/assets/icons/social/linkedin.webp"; 
+import Facebook from "@/assets/icons/social/facebook.webp";
+import TikTok from "@/assets/icons/social/Tiktok.webp";
+import Tumblr from "@/assets/icons/social/tumblr.webp";
+import Twitch from "@/assets/icons/social/twitch.webp";
+import Twitter from "@/assets/icons/social/twitter.webp";
+import YouTube from "@/assets/icons/social/youtube.webp";
+import Instagram from "@/assets/icons/social/instagram.webp";
+import SocialComponent from './socialIconComponent.astro'; 
+
+---
+<div class={`${customStyle ? customStyle : "flex flex-row mx-auto w-fit [&>*]:!mx-1 justify-evenly"}`}>
+        {SiteData.facebook && <SocialComponent social="Facebook" icon={Facebook} link={SiteData.facebook} />}
+        {SiteData.tiktok && <SocialComponent social="TikTok" icon={TikTok} link={SiteData.tiktok} />}
+        {SiteData.tumblr && <SocialComponent social="Tumblr" icon={Tumblr} link={SiteData.tumblr} />}
+        {SiteData.twitch && <SocialComponent social="Twitch" icon={Twitch} link={SiteData.twitch} />}
+        {SiteData.twitter && <SocialComponent social="Twitter" icon={Twitter} link={SiteData.twitter} />}
+        {SiteData.youtube && <SocialComponent social="YouTube" icon={YouTube} link={SiteData.youtube} />}
+        {SiteData.instagram && <SocialComponent social="Instagram" icon={Instagram} link={SiteData.instagram} />}        
+</div>

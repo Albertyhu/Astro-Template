@@ -1,0 +1,7 @@
+.parallaxProp {
+    transition: transform 0.6s cubic-bezier(0, 0, 0, 1) 0s
+}
+
+.box_shadow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}

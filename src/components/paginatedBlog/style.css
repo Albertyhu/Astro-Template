@@ -1,0 +1,87 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer components {
+    .PaginatedArrow{
+        @apply border-2 whitespace-nowrap;
+  }
+}
+
+/* styles for pagination components */
+.PaginatedListItem{
+  height: 32px;
+  text-align: center;
+  margin: auto 4px;
+  color: rgba(0, 0, 0, 0.87);
+  display: inline;
+  box-sizing: border-box;
+  align-items: center;
+  letter-spacing: 0.01071em;
+  border-radius: 16px;
+  line-height: 1.43;
+  font-size: 8px;
+  min-width: 32px;
+  margin-top: auto;
+  margin-bottom: auto;
+  justify-content: center;
+  padding: 5px;
+  user-select:none; 
+  cursor: pointer; 
+}
+
+.PaginatedListItem:hover{
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.PaginatedListItem:selected{
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.PaginatedListItem.dots:hover{
+    background-color: transparent;
+    cursor: default ;
+}
+
+
+.arrow::before {
+  position: relative;
+  content: '';
+  display: inline - block;
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+  border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+}
+
+.arrow.left{
+  transform: rotate(-135deg) translate(-50%);
+}
+
+.arrow.right{
+  transform: rotate(45deg);
+}
+
+.arrow:hover{
+    background-color: transparent;
+    cursor: default ;
+}
+
+.disabled.arrow{
+  pointer-events: none;
+}
+
+@media screen and (min-width: 320px) {
+  .PaginatedListItem {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 460px) {
+  .PaginatedListItem {
+    font-size: 16px;
+  }
+}

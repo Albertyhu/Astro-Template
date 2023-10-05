@@ -1,5 +1,6 @@
 ---
 import TagListItem from './tagListItem.astro'; 
+import { makeURLfriendly } from "@/hooks/string_hooks.tsx";
 const {tags} = Astro.props; 
 ---
 
@@ -8,7 +9,7 @@ const {tags} = Astro.props;
      class = "font-bold"
     >Tags:</p>
     {
-    tags.map((item: {tag: string}) => <TagListItem url = {`../tags/${item.tag}`} tag ={item.tag} /> )
+    tags.map((item: {tag: string}) => <TagListItem url = {`/tags/${makeURLfriendly(item.tag)}/1`} tag ={item.tag} /> )
     }
 </div>
 

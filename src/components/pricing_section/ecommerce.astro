@@ -1,0 +1,42 @@
+---
+import { pricingTiers } from "@/customization/pricing.js"
+import './pricing_style.css'
+import PanelHeader from './panelHeader.astro';
+import RenderFeatures from "./render_features.astro";
+import LiquidButton from "../liquid-button/index.astro"
+import PanelContainer from "./panel-container.astro";
+const plan = pricingTiers[1].plan; 
+const price = pricingTiers[1].price;
+const subtitle = pricingTiers[1].subtitle; 
+const CTA_link = pricingTiers[1].CTA_link; 
+const features = pricingTiers[1].features; 
+const main_color = "bg-[#3D5FB2]"
+---
+<PanelContainer  
+    customStyle="lg:scale-[0.95]"
+>
+    <PanelHeader 
+        {plan}
+        {subtitle}
+        {price}
+        headerStyle = {main_color}
+        circleStyle = {main_color}
+    />
+    <div class="pricing-content relative block pt-[100px] pb-[50px]">
+        <RenderFeatures features = {features} />
+    </div>
+    <div
+        class = "!absolute bottom-10 left-[50%] translate-x-[-50%]">
+        <LiquidButton 
+            button_label = "Start Now"
+            {CTA_link}
+            btnColor = {main_color}
+            txtStyle = "text-white"
+            customId = `${plan}`
+            customStyle = "mx-auto whitespace-nowrap"
+            maskColor = "before:bg-[#5BBAE4]"
+            newTab={false}     
+            link="/contact"      
+        />
+    </div>
+</PanelContainer>

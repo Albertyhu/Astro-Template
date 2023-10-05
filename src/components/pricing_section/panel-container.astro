@@ -1,0 +1,8 @@
+---
+const {
+    customStyle, 
+} = Astro.props; 
+---
+<div class=`w-full relative bg-white block rounded-lg pricing_shadow border-b-[4px] overflow-hidden ${customStyle}`>
+    <slot />
+</div>

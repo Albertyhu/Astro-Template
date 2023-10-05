@@ -1,0 +1,100 @@
+---
+export const prerender = true; 
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RenderPagination from '@/components/paginatedBlog/renderGeneralPagination.tsx';
+import { 
+    createStaticPathArrayForAuthors
+} from "../../../hooks/blogHooks"; 
+import Searchbar from '@/components/search/index.astro';
+import BlogPreview from '../../../components/blogComponents/previewLink.astro'; 
+import { RetrieveImageFromGlob } from "../../../hooks/imageHooks";
+import SmallBanner from '../../../components/small_banner/index.astro'; 
+import type { PostAssetType, PostType } from '../../../util/interface';
+
+export async function getStaticPaths() {
+    const PAGE_SIZE : number = 6;
+    var allPosts : Array<PostType> | []  = []; 
+    var totalPages : number = 0; 
+    try{
+        allPosts = await Astro.glob("../../posts/*.md"); 
+    } catch(error){
+        allPosts = []; 
+    }
+    var assets : Array<PostAssetType> = []
+    try {
+        assets = await Astro.glob("../../../assets/uploads/*");  
+    } catch(error){
+        assets = []
+    }
+    return createStaticPathArrayForAuthors({
+        allPosts, 
+        PAGE_SIZE,
+        assets, 
+    })
+}
+const {
+    name,
+    page,
+} = Astro.params; 
+const {
+    totalPages,
+    assets,
+    paginatedArray,
+    totalPosts,
+    PAGE_SIZE
+} = Astro.props; 
+const pageTitle = `Blog posts by ${name}`;
+
+
+---
+<BaseLayout
+    pageTitle = {pageTitle}
+    customDescription = `Blogs by ${name}`
+>
+    <SmallBanner 
+        title = {pageTitle}
+    />
+        <div
+            id="wrapper"
+            class="mb-[150px] w-10/12 mx-auto mt-10"
+        >
+            <Searchbar />
+        {totalPages > 1 &&
+            <RenderPagination 
+                pageSize = {PAGE_SIZE}
+                totalCount = {totalPosts as number}
+                currentPage = {parseInt(page)}
+                totalPages = {totalPages}
+                isMobile = {true}
+                category = "authors"
+                categoryName = {name}
+                client:load
+            />
+        }
+        {
+            paginatedArray && paginatedArray.length > 0 ? 
+            <div class = "grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
+                {paginatedArray.map(async (post :PostType) =>{
+                    return <BlogPreview {...post.frontmatter} url = {post.url} thumbnail = {post.featured_image} />
+
+                })}
+            </div>
+            : 
+            <p>This author hasn't published any posts yet.</p>
+        }
+        {totalPages > 1 &&
+            <div class = "w-full h-auto">
+                    <RenderPagination 
+                        pageSize = {PAGE_SIZE}
+                        totalCount = {totalPosts as number}
+                        currentPage = {parseInt(page)}
+                        totalPages = {totalPages}
+                        isMobile = {false}
+                        category = "authors"
+                        categoryName = {name}
+                        client:load
+                    />
+            </div>
+        }
+        </div>
+</BaseLayout>

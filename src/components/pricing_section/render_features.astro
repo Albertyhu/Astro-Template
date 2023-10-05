@@ -1,0 +1,21 @@
+---
+import './pricing_style.css'
+import CheckMark from "@/assets/icons/check-mark.webp"
+const {
+    features
+} = Astro.props; 
+---
+<ul class="relative mb-[40px] clearfix text-center w-10/12 mx-auto">
+    {features && features.length > 0 &&
+        features.map((feature : string, index: number)=>{
+            if(index === features.length - 1){
+                return  (<li class="relative block text-[17px] leading-[20px] text-center">
+                            {feature}
+                    </li>)
+            }
+            return <li class="relative block text-[17px] mb-[20px] leading-[20px] text-center">
+                    <span class = "">{feature}</span>
+                    </li>
+        })
+    }
+</ul>

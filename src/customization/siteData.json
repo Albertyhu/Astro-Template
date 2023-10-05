@@ -1,11 +1,23 @@
 {
-  "title": "template site",
-  "business_name": "Business Name",
-  "description": "My musings about the Astro framework", 
-  "owner_name": "TheLastSliceOfPizza",
-  "owner_email": "hualbert.y@gmail.com", 
-  "image": {
-    "src":"", 
-    "alt": ""
-  }
+	"title": "template site",
+	"business_name": "Uthan",
+	"description": "My musings about the Astro framework",
+	"owner_name": "TheLastSliceOfPizza",
+	"owner_email": "hualbert@rocketmail.com",
+	"address": "Chicago 13",
+	"city": "Melborne City",
+	"state": "California",
+	"country": "United States",
+	"zip": "94511",
+	"business_email": "info@example.com",
+	"business_phone": "+1 (915) 365-1515",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"facebook": "https://www.facebook.com",
+	"twitter": "https://www.x.com",
+	"pinterest": "https://www.pinterest.com",
+	"instagram": "https://www.instagram.com",
+	"youtube": "https://www.youtube.com"
 }

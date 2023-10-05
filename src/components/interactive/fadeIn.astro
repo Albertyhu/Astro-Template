@@ -1,0 +1,9 @@
+---
+const {customStyle } = Astro.props;
+import "./animation.css"
+---
+<div
+    class = `fadeOut fadeInTag ${customStyle}`
+>
+    <slot />
+</div>

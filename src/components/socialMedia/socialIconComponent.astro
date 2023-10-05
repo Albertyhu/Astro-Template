@@ -1,0 +1,24 @@
+---
+const {
+    social,
+    icon, 
+    link, 
+    wrapperStyle, 
+    imgStyle, 
+} = Astro.props; 
+---
+<div
+    class = `${wrapperStyle ? wrapperStyle : "w-[30px] h-[30px] flex justify-center bg-[rgba(255,255,255,0.4)] rounded-lg"}`
+>
+    <a
+        aria-label = `${social} - Opens in new tab`
+        href={link}
+        target="_blank"
+    >
+        <img  
+            src ={icon.src}
+            alt = `${social} link`
+            class =`${imgStyle ? imgStyle : "w-full h-full object-fit"}`
+        />
+    </a>
+</div>

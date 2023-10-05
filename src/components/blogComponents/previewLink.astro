@@ -1,48 +1,67 @@
 ---
+//This component renders the thumbnail, title of a blog post that links to the actual post
 import TagList  from './tagList.astro'
-import { Image } from "astro:assets";
+import LogoComponent from '../logoComponent.astro';
 const {
     title,
     author, 
     description,
     thumbnail,
-    images,
+    featured_image,
     pubDate,
     tags, 
     url
 } = Astro.props; 
+
+import DescriptionComponent from './description.tsx'; 
 let datePublished : Date | null = pubDate ? new Date(pubDate)  : null; 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+import "./style.css"; 
 ---
 <div
-    class = "rounded-lg box_shadow bg-white blog-preview-panel"
-    id="blog-preview-panel"
+    class = "rounded-lg post-box-shadow bg-white blog-preview-panel mb-[20px]"
 >
-    <div
-        id="preview_wrapper"
-        class = "w-11/12 mx-auto py-10"
-    >
-    {title && 
-        <a 
-            href={url} 
-            class = "cursor-pointer text-center text-2xl"
-            ><h2 class = "font-bold">{title}</h2></a>
-    }
-    {thumbnail &&
+    {thumbnail ?
         <div
-        class = "object-fit cursor-pointer"
+        class = "overflow-hidden cursor-pointer h-[250px] w-auto rounded-[5px_5px_0px_0px]"
         >
             <a 
                 href={url}
             >
                 <img
+                    loading = "lazy"
+                    decoding="async"
                     src = {thumbnail}
                     alt = {`${title} featured image`}
-                    class = "w-full h-full"
+                    class = "w-full h-full object-cover transition-all duration-[2000ms]"
                 />
             </a>
         </div>
-        
+        :
+        <div
+            class = "overflow-hidden cursor-pointer h-[250px] w-auto rounded-[5px_5px_0px_0px]"
+        >
+            <LogoComponent 
+                blackLogo = {false} 
+                customStyle = "w-full h-full bg-[#5b87e4] justify-center"
+                logoStyle = "w-10/12 h-auto mx-auto object-fit pt-10"
+                disableLink = {true}
+            />
+        </div>
+    }
+    <div
+        class = "w-9/12 mx-auto py-10"
+    >
+    {datePublished &&
+        <div
+            class="text-[#7a7b80]"
+        >{datePublished.toLocaleDateString()}</div>
+    }
+    {title && 
+        <a 
+            href={url} 
+            class = "cursor-pointer text-2xl"
+            ><h2 class = "font-bold">{title}</h2></a>
     }
     <p>
     {author &&
@@ -50,12 +69,9 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
         class = "font-bold"
         >Published by <b>{author}</b></span>
     } 
-    {datePublished &&
-        <span> | {datePublished.toLocaleDateString()}</span>
-    }
     </p>
     {description &&
-        <p><b>Description: </b>{description}</p>
+        <DescriptionComponent {description} client:visible />
     }
     {tags && tags.length > 0 &&
         <TagList tags = {tags} />

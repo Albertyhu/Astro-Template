@@ -1,0 +1,39 @@
+
+---
+import './style.css'
+import LogoComponent from '@/components/logoComponent.astro';
+const {
+    featured_image,
+    title, 
+    pubDate, 
+    url
+} = Astro.props; 
+const formattedDate = new Date(pubDate); 
+---
+<a href = {url}>
+<div class="flex flex-row gap-5 relative min-h-[100px] text-[16px] my-5 ">
+        <div>
+        {featured_image ? 
+            <figure class="rounded-lg overflow-hidden w-[80px] h-[80px]">
+                <img 
+                src={featured_image} 
+                alt="featured_image image"
+                class="w-full h-full object-cover" />
+            </figure>
+            :
+            <LogoComponent 
+                blackLogo = {true} 
+                customStyle = "w-full h-full bg-[#5b87e4] justify-center py-1"
+                logoStyle = "w-5/12 h-auto mx-auto object-fit"
+                disableLink = {true}
+            />
+        }
+        </div>
+        <div class = "grid">
+            <h5 class="text-lg font-medium mb-[6px]">{title}</h5>
+            <span class="post-date relative block text-xl leading-[28px]">{formattedDate.toDateString()}</span>
+        </div>
+
+</div>
+</a>
+

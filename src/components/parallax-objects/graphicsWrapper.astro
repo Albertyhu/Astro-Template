@@ -1,0 +1,62 @@
+---
+import './style.css'
+const {
+    ForeGroundObj1, 
+    ForeGroundObj2, 
+    backgroudImg 
+} = Astro.props; 
+---
+<div
+    class = "w-full sm:w-6/12 mx-auto justify-center"
+>
+    <div
+    class = "sm:h-fit relative top-[25%] hidden sm:block"
+    >
+        <div
+            id ="ForeGround1"
+            class = "overflow-hidden w-[325px] h-auto absolute parallaxProp z-[2] sm:right-[-150px] box_shadow"
+        >
+            <img 
+                decoding = "async"
+                loading = "lazy"
+                src = {ForeGroundObj1.src} 
+                class = "w-full h-full object-cover m-auto"
+                alt = "Potted Plants"
+            />
+        </div>
+        <div
+            id ="ForeGround2"
+            class = "overflow-hidden w-11/12 h-auto absolute parallaxProp z-[1] sm:left-[-75px] box_shadow"
+        >
+            <img 
+                decoding = "async"
+                loading = "lazy"
+                src = {ForeGroundObj2.src} 
+                class = "w-full h-full object-cover m-auto"
+                alt = "ForeGround2"
+            />
+        </div>
+        <div
+            class = "overflow-hidden w-[300px] h-auto absolute parallaxProp z-[0]"
+        >
+            <img 
+                decoding = "async"
+                loading = "lazy"
+                src = {backgroudImg.src} 
+                class = "w-full h-full object-cover m-auto"
+                alt = "ForeGround2"
+            />
+        </div>
+    </div>
+</div>
+<script is:inline>
+    const ForeGround1 = document.getElementById("ForeGround1")
+    const ForeGround2 = document.getElementById("ForeGround2")
+    const scrollEvent = () =>{
+        if(ForeGround1)
+            ForeGround1.style.transform = `translateY(${-window.scrollY}px)`
+        if(ForeGround2)
+            ForeGround2.style.transform = `translateY(${-window.scrollY/2}px)`
+    }
+    window.addEventListener("scroll", scrollEvent);
+</script>

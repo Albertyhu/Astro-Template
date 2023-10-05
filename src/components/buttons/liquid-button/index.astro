@@ -1,0 +1,35 @@
+---
+import "./liquid-button.css";
+const {
+    button_label,
+    link, 
+    customStyle = "", 
+    btnColor, 
+    txtStyle, 
+    maskColor,
+    customID,
+    newTab 
+} = Astro.props;
+    const BeforeStyle = `before:object-fit before:content-[''] before:h-full before:w-0 ${maskColor ? maskColor : 'before:bg-[#21563D]'} before:bg-[#21563D] before:absolute before:inset-0 before:opacity-60 hover:before:w-full before:transform-all before:z-[0]`
+---
+<button 
+id = `${customID ? customID : button_label}-liquid-button`
+class ={`w-fit mx-auto p-1 sm:px-5 sm:py-1 rounded-lg cursor-pointer select-none active:translate-x-[1px] active:translate-y-[1px] relative ${btnColor  ? btnColor : "bg-[#2f7955]"}  text-white font-bold overflow-hidden ${BeforeStyle} clippedShape ${customStyle}`}
+>
+    {newTab ? 
+    <a 
+        href={link}
+        target = "_blank"
+        aria-label = "opens in new tab"
+        class =`z-1 capitalize text-base sm:text-2xl ${txtStyle ? txtStyle : "textwhite"} text-center relative !select-none`
+    >
+        {button_label}
+    </a>
+    :
+    <a href={link}
+        class =`z-1 capitalize text-base sm:text-2xl ${txtStyle ? txtStyle : "textwhite"} text-center relative !select-none`
+    >
+        {button_label}
+    </a>    
+    }
+</button>

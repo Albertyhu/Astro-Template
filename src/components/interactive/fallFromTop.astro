@@ -1,0 +1,16 @@
+---
+import "./animation.css";
+const {
+    wrapperStyle,
+    Delay, 
+} = Astro.props; 
+---
+<div
+    class = `w-fit text-center overflow-hidden ${wrapperStyle ? wrapperStyle : ""}`
+>
+    <div
+        class = "fallingTag startingFallingAnim"
+        >
+        <slot />
+    </div>
+</div>
