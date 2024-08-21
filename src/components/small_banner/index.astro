@@ -1,0 +1,36 @@
+---
+//Banner for all pages that is not the home page
+//Utilizes the class name scrollToTopIndicator to trigger the scrollToTop
+import AnimatedGrass from "../animated_grass/index.astro"; 
+import TitleComponent from '../TitleComponent/index.astro';
+import defaultImage from '@/assets/images/banner/japanese-garden.jpg';
+const {
+    image,
+    title, 
+    subtitle,
+    button_label, 
+    link, 
+} = Astro.props; 
+
+---
+<div
+    id = "small_banner"
+    class={`relative h-[250px] w-full bg-center before:absolute  before:content-[''] before:bg-[rgba(0,0,0,0.4)] before:w-full before:h-full before:z-10 scrollToTopIndicator`}
+>   
+    <img 
+        src = {image ? image.src : defaultImage.src} 
+        class = "w-full h-full object-cover"
+        alt="banner image"
+    />
+    {title && 
+        <TitleComponent 
+            {title}
+            {subtitle}
+            {button_label}
+            {link}
+            wrapperStyle = "w-11/12 mx-auto overflow-hidden max-w-[270px] xm:max-w-[360px] sm:max-w-[636px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]"
+            titleStyle = "md:whitespace-nowrap text-white text-center text-3xl leading-[50px] sm:text-[45px] sm:leading-[90px] fadeInUp font-['Prata',serif]"
+        />
+    }
+    <AnimatedGrass /> 
+</div>

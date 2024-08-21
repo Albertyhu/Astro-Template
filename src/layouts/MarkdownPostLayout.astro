@@ -1,60 +1,126 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import ContentWrapper from "./ContentWrapper.astro";
-import TagList from "../components/taglist/taglist.astro";
-import RenderImages from '@/components/blogComponents/renderImage.tsx'; 
-import type { ImageType } from "@/util/interface";
-import { formatDate } from "@/lib/utils";
+import TagList from "@/components/taglist/taglist.astro";
+import RecentPosts from '@/components/blogComponents/recent_post/index.astro';
+import {
+    formatRecentPostArray,
+    setBlogPostImages, 
+} from "@/hooks/blogHooks.ts"; 
+import type { 
+    PostType,
+    PostAssetType,
+    formattedPostType,
+ } from "@/util/interface.tsx"; 
+import SearchComponent from '@/components/search/index.astro';
 const { frontmatter } = Astro.props;
 const tags = frontmatter.tags; 
----
+var assets : Array<PostAssetType> = [];  
+try{
+    assets = await Astro.glob("../assets/uploads/*")
+    } catch(e){
+}
+var FeaturedImage = null; 
 
-<BaseLayout pateTitle={frontmatter.title} {frontmatter}>
-    <ContentWrapper>
-        <div 
-            class = "flex flex-col sm:flex-row sm:gap-[5em] mt-5 mb-[150px]"
+var allPosts : Array<PostType> = []; 
+try {
+    allPosts = await Astro.glob("../pages/posts/*.md"); 
+} catch(error){
+    console.log("error: ", error)
+}
+var formattedRecentPosts : Array<formattedPostType> = []
+var recentPosts: Array<formattedPostType> = []; 
+if(allPosts && allPosts.length > 0){
+    recentPosts = formatRecentPostArray(allPosts, 3)
+}
+var payload = setBlogPostImages(assets, frontmatter.featured_image, recentPosts)
+FeaturedImage = payload.main_featured_image; 
+formattedRecentPosts = [...payload.recentPosts]
+
+const formattedDate = new Date(frontmatter.pubDate)
+---
+<BaseLayout 
+    pageTitle={frontmatter.title} 
+    {frontmatter}
+    customDescription = {frontmatter.description}
+    CTA_Banner = {true}
+    >
+    <div 
+        class = "flex flex-col lg:flex-row sm:gap-10 mt-20 w-10/12 mx-auto"
+    > 
+        <div
+            class = ""
         >
-            <div
-                class ="sm:min-w-[70%]"
-            >
-                <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
-                <p>Written by <a 
-                    href ={`/authors/${frontmatter.author}`}
-                    class = "hover:underline cursor-pointer"
-                    ><b>{frontmatter.author}</b></a>
-                </p>
-                <p>Published on {formatDate(frontmatter.pubDate)}</p>
-                <hr class="border-2 bg-black w-full mb-5" />
-                {frontmatter.featured_image &&
-                    <div
-                        class="object-fit sm:w-11/12 sm:h-auto overflow-hidden mx-auto"
-                    >
-                        <img
-                            alt={frontmatter.title}
-                            src={frontmatter.featured_image}
+            {FeaturedImage &&
+                <div
+                    id="FeaturedImage"
+                    class ="max-h-[500px] w-full overflow-hidden justify-center mb-10"
+                >
+                    <img                    
+                        src ={FeaturedImage} 
+                        class = "w-full h-full object-cover" 
+                        alt = `${frontmatter.title} image`
                         />
-                    </div>
-                }
+                </div>
+            }
+            {frontmatter.pubDate && 
+                <p
+                    class = "relative block text-[15px] mb-[2px] text-slate-400"
+                >{formattedDate.toLocaleDateString()}</p>
+            }
+            <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+            <p>Written by <a 
+                href ={`/authors/${frontmatter.author}/1`}
+                class = "hover:underline cursor-pointer"
+                ><b>{frontmatter.author}</b></a></p>
+            <hr class="border-2 bg-black w-full my-5" />
+            <div
+                id = "blog-content"
+            >
                 <slot />
-                {frontmatter.images && frontmatter.images.length > 0 && 
-                    <div class = "grid sm:grid-cols-3 gap-5 my-5">
-                        {frontmatter.images.map((img: ImageType) =>{
-                            const url = img.url ? img.url : ""; 
-                            const alt = img.alt? img.alt : ""; 
-                            return <RenderImages altText = {alt} image = {url} client:visible />
-                        })
-                        }
-                    </div>
-                }
             </div>
-            <div>
-                {tags && tags.length > 0 &&
-                    <div>  
-                        <h2 class = "font-bold text-[25px]">Tags</h2>
-                        <TagList tags = {tags} />
-                    </div>
-                }
+            {tags && tags.length > 0 &&
+            <div class = "mt-10">
+                <h3
+                    class ="font-bold text-base"
+                >Tags: </h3>
+                <TagList tags = {tags} />
             </div>
-        </div>  
-    </ContentWrapper>
+            }
+        </div>
+        <div class = "flex flex-col min-w-[33.33%]">
+            <SearchComponent 
+                {allPosts}
+            />
+            <RecentPosts 
+                posts = {formattedRecentPosts}
+             />
+        </div>
+    </div>  
 </BaseLayout>
+<script is:inline>
+/* for the animations throughout the webpage*/
+const callback = (entries) => {
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            if(entry.target.classList.contains("fallingTag"))
+            {
+                entry.target.classList.remove("startingFallingAnim")
+            }
+        }
+        else{
+            if(entry.target.classList.contains("fallingTag"))
+            {
+                entry.target.classList.add("startingFallingAnim")
+            }
+        }
+    })
+}
+const options = {
+    threshold: 0.1, 
+} 
+ const observer = new IntersectionObserver(callback, options)
+const FallFromTop = document.getElementsByClassName("fallingTag ")
+for(var i = 0; i < FallFromTop.length; i++){
+        observer.observe(FallFromTop[i])
+}
+</script> 

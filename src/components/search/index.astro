@@ -1,0 +1,12 @@
+---
+import SearchBar from "./searchbar";
+const {
+    allPosts
+} = Astro.props; 
+---
+<form
+    id="SearchBar"
+    class ="relative block py-[30px] px-[40px] rounded-lg mb-[50px] border-2 border-[#dbdbdb] h-fit border-solid"
+>
+    <SearchBar {allPosts} client:load />
+</form>

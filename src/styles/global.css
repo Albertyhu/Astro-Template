@@ -12,6 +12,30 @@
 }
 
 @layer components {
+  .btn-primary {
+      @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer border-none text-center w-fit select-none text-black mx-auto hover:bg-[#a2a2a2] bg-[#dbdbdb] box_shadow whitespace-nowrap [&>*]:inline-flex;
+  }
+  .btn-secondary {
+      @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer border-black border-2 text-center w-fit select-none text-white mx-auto hover:bg-[#535353] bg-[#333333] box_shadow whitespace-nowrap [&>*]:inline-flex block;
+  }
+  .btn-delete {
+      @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer text-center w-fit select-none text-white mx-auto hover:bg-[#FF3333] bg-[#E31010] box_shadow;
+  }
+
+  .btn-standard {
+      @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] cursor-pointer border-none text-center w-fit h-fit select-none m-auto hover:bg-[#a2a2a2] box_shadow whitespace-nowrap block;
+  }
+  .btn-submit {
+      @apply !active:bg-[#C6C6C6] border-[#dbdbdb] border-2 text-black mx-auto hover:bg-gray-300 !bg-[#dbdbdb] select-none;
+  }
+
+  .btn-cancel {
+      @apply active:bg-[#4B4B4B] p-[10px] border-white border-2 text-white mx-auto hover:bg-gray-300 !bg-[#333333] rounded-[15px] box_shadow block;
+  }
+
+  .btn-add {
+      @apply rounded-[15px] p-[10px] active:translate-x-[5px] active:translate-y-[5px] text-base cursor-pointer border-none text-center w-fit select-none text-white mx-auto hover:bg-[#a2a2a2] bg-[#888888] box_shadow whitespace-nowrap [&>*]:inline-flex [&>img]:ml-5;
+  }
   .hamburger {
     @apply my-auto mr-[1rem] block cursor-pointer md:hidden;
   }
@@ -228,6 +252,31 @@ html.dark {
 
 .disabled.arrow{
   pointer-events: none;
+}
+
+#blog-content h1 {
+    font-size: 2rem; 
+    font-weight: bold;
+}
+
+#blog-content h2 {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+}
+
+#blog-content p {
+    margin: 10px 0px;
+}
+
+#blog-content ol {
+    margin:5px auto; 
+    width: 90%;
+}
+
+#blog-content ol li{
+    margin: 10px 0px;
+    list-style-type: number;
+    list-style-position: inside;
 }
 
 @media screen and (min-width: 320px) {

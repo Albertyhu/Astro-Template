@@ -1,0 +1,69 @@
+	<script is:inline>
+		/*desktop header*/
+		const DesktopHeader = document.getElementById("desktop-header")
+		const DesktopBP = document.getElementById("layer1Wrapper")
+
+		/*mobile nav bar*/ 
+		const SectionThree = document.getElementById("HomeSectionThree"); 
+		const MobileHeader = document.getElementById("MobileHeader"); 
+
+
+		/*Parallax layers*/
+		const layer3 = document.getElementById("layer3"); 
+		const layer4 = document.getElementById("layer4");
+		const layer7 = document.getElementById("layer7"); 
+		const layer8 = document.getElementById("layer8");
+		const MoonElement = document.getElementById("moon"); 
+
+		const scrollEvent = () =>{
+			/*desktop header*/
+			if(DesktopBP.getBoundingClientRect().top > 34){
+				if(!DesktopHeader.classList.contains("hiddenNav")){
+					DesktopHeader.classList.remove("bg-transparent")
+					DesktopHeader.classList.add("hiddenNav")
+				}
+			}
+			else{
+					DesktopHeader.classList.remove("hiddenNav")
+			}
+			/*mobile header*/
+			if(SectionThree.getBoundingClientRect().top < 34){
+				if(!MobileHeader.classList.contains("bg-[#5b87e4]")){
+					MobileHeader.classList.remove("bg-transparent")
+					MobileHeader.classList.add("bg-[#5b87e4]")
+				}
+			}
+			else{
+				if(!MobileHeader.classList.contains("bg-transparent")){
+					MobileHeader.classList.remove("bg-[#5b87e4]")
+					MobileHeader.classList.add("bg-transparent")
+				}
+			}
+
+			/*parallax*/
+			let parent = document.getElementById("parallax-container");
+			let children = parent?.getElementsByTagName("div");
+			if(children){
+				for(let i = 3; i < children.length -1; i++){
+					children[i].style.transform = `translateY(${window.scrollY  * ((i)/ (children.length))}px)`; 
+
+				}
+			}
+			layer3.style.transform = `translateY(${window.scrollY * (2/children.length)}px)`
+			layer4.style.transform = `translateY(${window.scrollY * (3/children.length)}px)`
+
+			if(layer7){
+				layer7.style.transform = `translateY(${window.scrollY * 0.5}px)`
+			}
+			if(layer8){
+				layer8.style.transform = `translateY(${window.scrollY}px)`; 
+			}
+			if(MoonElement){
+				MoonElement.style.transform = `translateX(${0 + window.scrollY}px) translateY(${470 - window.scrollY}px)`;
+				if(screen.width >= 360){
+					MoonElement.style.transform = `translateX(${30 + window.scrollY * 2}px) translateY(${375 - window.scrollY}px)`;
+				}
+			}
+		}
+		window.addEventListener("scroll", scrollEvent)  
+	</script>

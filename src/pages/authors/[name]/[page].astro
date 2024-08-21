@@ -1,15 +1,13 @@
 ---
 export const prerender = true; 
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import RenderPagination from '@/components/paginatedBlog/renderGeneralPagination.tsx';
 import { 
     createStaticPathArrayForAuthors
-} from "../../../hooks/blogHooks"; 
+} from "@/hooks/blogHooks"; 
 import Searchbar from '@/components/search/index.astro';
-import BlogPreview from '../../../components/blogComponents/previewLink.astro'; 
-import { RetrieveImageFromGlob } from "../../../hooks/imageHooks";
-import SmallBanner from '../../../components/small_banner/index.astro'; 
-import type { PostAssetType, PostType } from '../../../util/interface';
+import BlogPreview from '@/components/blogComponents/previewLink.astro'; 
+import type { PostAssetType, PostType } from '@/util/interface';
 
 export async function getStaticPaths() {
     const PAGE_SIZE : number = 6;
@@ -51,9 +49,6 @@ const pageTitle = `Blog posts by ${name}`;
     pageTitle = {pageTitle}
     customDescription = `Blogs by ${name}`
 >
-    <SmallBanner 
-        title = {pageTitle}
-    />
         <div
             id="wrapper"
             class="mb-[150px] w-10/12 mx-auto mt-10"

@@ -1,0 +1,60 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ContentWrapper from "./ContentWrapper.astro";
+import TagList from "../components/taglist/taglist.astro";
+import RenderImages from '@/components/blogComponents/renderImage.tsx'; 
+import type { ImageType } from "@/util/interface";
+import { formatDate } from "@/lib/utils";
+const { frontmatter } = Astro.props;
+const tags = frontmatter.tags; 
+---
+
+<BaseLayout pateTitle={frontmatter.title} {frontmatter}>
+    <ContentWrapper>
+        <div 
+            class = "flex flex-col sm:flex-row sm:gap-[5em] mt-5 mb-[150px]"
+        >
+            <div
+                class ="sm:min-w-[70%]"
+            >
+                <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+                <p>Written by <a 
+                    href ={`/authors/${frontmatter.author}`}
+                    class = "hover:underline cursor-pointer"
+                    ><b>{frontmatter.author}</b></a>
+                </p>
+                <p>Published on {formatDate(frontmatter.pubDate)}</p>
+                <hr class="border-2 bg-black w-full mb-5" />
+                {frontmatter.featured_image &&
+                    <div
+                        class="object-fit sm:w-11/12 sm:h-auto overflow-hidden mx-auto"
+                    >
+                        <img
+                            alt={frontmatter.title}
+                            src={frontmatter.featured_image}
+                        />
+                    </div>
+                }
+                <slot />
+                {frontmatter.images && frontmatter.images.length > 0 && 
+                    <div class = "grid sm:grid-cols-3 gap-5 my-5">
+                        {frontmatter.images.map((img: ImageType) =>{
+                            const url = img.url ? img.url : ""; 
+                            const alt = img.alt? img.alt : ""; 
+                            return <RenderImages altText = {alt} image = {url} client:visible />
+                        })
+                        }
+                    </div>
+                }
+            </div>
+            <div>
+                {tags && tags.length > 0 &&
+                    <div>  
+                        <h2 class = "font-bold text-[25px]">Tags</h2>
+                        <TagList tags = {tags} />
+                    </div>
+                }
+            </div>
+        </div>  
+    </ContentWrapper>
+</BaseLayout>
